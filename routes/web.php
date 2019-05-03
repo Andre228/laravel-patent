@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
+   Route::resource('posts', 'PostController')->names('museum.posts');
+});
+
+
+Route::resource('rest','RestController')->names('restTest');
