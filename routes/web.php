@@ -21,3 +21,10 @@ Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
 
 
 Route::resource('rest','RestController')->names('restTest');
+
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/posts', 'SpaController@index')->where('any', '.*');
+
+//Route::get('/home', 'HomeController@index')->name('home');
