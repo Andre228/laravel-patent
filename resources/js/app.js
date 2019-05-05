@@ -1,30 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 import App from './components/App'
-import Hello from './components/ExampleComponent'
-import post_component from './components/PostsComponents/post_component'
+import Welcome from './components/Welcome'
+import PostsComponent from "./components/PostsComponent";
+
+
+window.vue = require('vue');
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/posts',
+            path: '/home',
             name: 'home',
-            component: post_component
+            component: Welcome
         },
         {
-            path: '/example',
-            name: 'hello',
-            component: Hello,
+            path: '/posts',
+            name: 'posts',
+            component: PostsComponent
         },
-    ],
+    ]
 });
+
 
 const app = new Vue({
     el: '#app',
-    components: { App },
+    render: h => h(App),
     router,
 });
