@@ -1,0 +1,19 @@
+.museum-navbar {
+    /*background: radial-gradient(circle farthest-corner at 100px 50px,#EC4451, #F4497E);*/
+   /* background: linear-gradient(to right, #F6EFD2, #CEAD78);*/
+    font-size: 28px;
+    background: radial-gradient(circle farthest-corner at 100px 50px, #577A99, #395177);
+    height: 90px;
+}
+
+.navbar-museum-style-text:hover {
+
+    color:whitesmoke;
+    font-size: 35px;
+    transition: 0.3s;
+    /*text-decoration: underline;*/
+}
+.nav-item a:hover {
+    color:whitesmoke;
+    color:white;
+}

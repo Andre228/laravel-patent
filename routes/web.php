@@ -15,16 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
    Route::resource('posts', 'PostController')->names('museum.posts');
 });
 
 
-Route::resource('rest','RestController')->names('restTest');
+$groupData = [
+    'namespace' => 'Museum\Admin',
+    'prefix' => 'admin/museum',
+];
 
-//Auth::routes();
+Route::group($groupData, function () {
+    $methods = ['index', 'edit', 'store', 'update', 'create','show'];
+    Route::resource('categories', 'CategoryController')->only($methods)->names('admin.categories');
+});
 
-//Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/posts', 'SpaController@index')->where('any', '.*');
 
-//Route::get('/home', 'HomeController@index')->name('home');
+
