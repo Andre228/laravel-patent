@@ -31,7 +31,7 @@ $groupData = [
 
 Route::group($groupData, function () {
     $methods = ['index', 'edit', 'store', 'update', 'create','show'];
-    Route::resource('categories', 'CategoryController')->only($methods)->names('admin.categories');
+    Route::resource('categories', 'CategoryController')->only($methods)->names('museum.admin.categories');
 });
 
 

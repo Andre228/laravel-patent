@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/Museum/MuseumHeaderStyle/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/Museum/AdminFields/adminbars.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

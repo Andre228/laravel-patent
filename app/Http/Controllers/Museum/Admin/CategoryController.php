@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Museum\Admin;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        dd(__METHOD__);
+        $dsd = Category::all();
+        $paginator = Category::paginate(15);
+     //   dd($dsd, $paginator);
+
+        return view('museum.admin.category.index', compact('paginator'));
     }
 
     /**
@@ -57,7 +61,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        dd(__METHOD__);
+        $item = Category::findOrFails($id);
+        $categotyList = Category::all();
+         return view('museum.admin.category.edit', compact('item', '$categotyList'));
     }
 
     /**

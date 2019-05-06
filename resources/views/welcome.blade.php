@@ -77,6 +77,7 @@
                 <div class="links">
                     <a href="/museum/posts">Экспонаты</a>
                     <a href="https://laravel-news.com">Новости</a>
+                    <a href="/admin/museum/categories">Категории(Админ)</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
