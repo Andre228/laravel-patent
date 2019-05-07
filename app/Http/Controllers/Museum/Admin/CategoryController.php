@@ -61,9 +61,9 @@ class CategoryController extends BaseController
      */
     public function edit($id)
     {
-        $item = Category::findOrFails($id);
+        $item = Category::findOrFail($id);
         $categotyList = Category::all();
-         return view('museum.admin.category.edit', compact('item', '$categotyList'));
+         return view('museum.admin.category.edit', compact('item', 'categotyList'));
     }
 
     /**
@@ -75,7 +75,20 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        dd(__METHOD__);
+        $item = Category::find($id);
+        if(empty($item)) {
+            return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])->withInput();
+        }
+
+        $data = $request->all();
+        $result = $item->fill($data)->save();
+
+        if($result) {
+            return redirect()->route('museum.admin.categories.edit', $item->id)->with(['success' => 'Успешно сохранено']);
+        }
+        else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+        }
     }
 
     /**
