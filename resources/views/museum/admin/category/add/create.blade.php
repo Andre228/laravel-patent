@@ -4,15 +4,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
-
-
-
 @extends('layouts.app')
 
 @section('content')
     @php /** @var \App\Models\Category $item*/ @endphp
-    <form method="POST" action="{{ route('museum.admin.categories.update', $item->id) }}">
-        @method('PATCH')
+    <form method="POST" action="{{ route('museum.admin.categories.store') }}">
         @csrf
         <div class="container">
             @php /** @var \Illuminate\Support\ViewErrorBag $errors*/ @endphp
@@ -38,7 +34,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true" onclick="deleteErrorsBlock()">x</span>
                             </button>
-                           <div>{{ session()->get('success') }}</div>
+                            <div>{{ session()->get('success') }}</div>
                         </div>
                     </div>
                 </div>
@@ -46,10 +42,10 @@
 
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    @include('museum.admin.category.includes.item_edit_main_col')
+                    @include('museum.admin.category.includes.add.item_add_main_col')
                 </div>
                 <div class="col-md-3">
-                    @include('museum.admin.category.includes.item_edit_add_col')
+                    @include('museum.admin.category.includes.add.item_add_sub_col')
                 </div>
             </div>
         </div>
@@ -65,18 +61,4 @@
         $("div.notification-block").remove();
     }
 
-    $(document).ready(function () {
-    //    var errorrow = jQuery('.error-row');
-    // if(errorrow.text()=='') {
-    //     delay(my, 2000);
-    //
-    //     function my() {
-    //         console.log("I");
-    //
-    //         $("div.error-block").remove();
-    //         // errorrow.remove();
-    //
-    //     }
-    // }
-    });
 </script>

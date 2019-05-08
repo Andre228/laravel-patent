@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Museum\Admin;
 
+use App\Http\Requests\MuseumCategoryCreateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\MuseumCategoryUpdateRequest;
 
 class CategoryController extends BaseController
 {
@@ -16,7 +18,6 @@ class CategoryController extends BaseController
     {
         $dsd = Category::all();
         $paginator = Category::paginate(15);
-     //   dd($dsd, $paginator);
 
         return view('museum.admin.category.index', compact('paginator'));
     }
@@ -28,7 +29,10 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        dd(__METHOD__);
+       $item = new Category();
+       $categotyList = Category::all();
+
+       return view('museum.admin.category.add.create', compact('item', 'categotyList'));
     }
 
     /**
@@ -37,7 +41,7 @@ class CategoryController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MuseumCategoryCreateRequest $request)
     {
         dd(__METHOD__);
     }
@@ -73,8 +77,9 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MuseumCategoryUpdateRequest $request, $id)
     {
+
         $item = Category::find($id);
         if(empty($item)) {
             return back()->withErrors(['msg' => "Запись id=[{$id}] не найдена"])->withInput();
