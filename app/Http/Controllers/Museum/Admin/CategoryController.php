@@ -6,6 +6,7 @@ use App\Http\Requests\MuseumCategoryCreateRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\MuseumCategoryUpdateRequest;
+use Illuminate\Support\Str;
 
 class CategoryController extends BaseController
 {
@@ -43,7 +44,24 @@ class CategoryController extends BaseController
      */
     public function store(MuseumCategoryCreateRequest $request)
     {
-        dd(__METHOD__);
+        $data = $request->input();
+        if(empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+//        $item = new Category($data);
+//        $item->save();
+
+        $item = (new Category())->create($data);
+
+        if($item) {
+            return redirect()->route('museum.admin.categories.edit', $item->id)->with(['success' => 'Успешно сохранено']);
+        }
+        else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+        }
+
+
     }
 
     /**
@@ -86,7 +104,12 @@ class CategoryController extends BaseController
         }
 
         $data = $request->all();
-        $result = $item->fill($data)->save();
+
+        if(empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+
+        $result = $item->update($data);
 
         if($result) {
             return redirect()->route('museum.admin.categories.edit', $item->id)->with(['success' => 'Успешно сохранено']);
