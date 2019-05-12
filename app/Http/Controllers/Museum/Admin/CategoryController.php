@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Museum\Admin;
 
 use App\Http\Requests\MuseumCategoryCreateRequest;
 use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\MuseumCategoryUpdateRequest;
 use Illuminate\Support\Str;
@@ -15,10 +16,25 @@ class CategoryController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+
+
+    /**
+     * @var $categoryRepository
+    */
+    private $categoryRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->categoryRepository = app(CategoryRepository::class);
+    }
+
     public function index()
     {
-        $dsd = Category::all();
-        $paginator = Category::paginate(15);
+       // $dsd = Category::all();
+      //  $paginator = Category::paginate(15);
+        $paginator = $this->categoryRepository->getAllWithPaginate(5);
 
         return view('museum.admin.category.index', compact('paginator'));
     }
@@ -30,8 +46,13 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-       $item = new Category();
-       $categotyList = Category::all();
+//       $item = new Category();
+//       $categotyList = Category::all();
+
+        $item = new Category();
+        $categotyList = $this->categoryRepository->getForComboBox();
+
+
 
        return view('museum.admin.category.add.create', compact('item', 'categotyList'));
     }
@@ -79,12 +100,16 @@ class CategoryController extends BaseController
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     * @param CategoryRepository $categoryRepository
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,  CategoryRepository $categoryRepository)
     {
-        $item = Category::findOrFail($id);
-        $categotyList = Category::all();
+        $item = $categoryRepository->getEdit($id);
+        if(empty($item)) {
+            abort(404);
+        }
+        $categotyList = $categoryRepository->getForComboBox();
          return view('museum.admin.category.edit', compact('item', 'categotyList'));
     }
 
