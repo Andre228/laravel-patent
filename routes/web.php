@@ -30,8 +30,17 @@ $groupData = [
 ];
 
 Route::group($groupData, function () {
-    $methods = ['index', 'edit', 'store', 'update', 'create','show'];
-    Route::resource('categories', 'CategoryController')->only($methods)->names('museum.admin.categories');
+
+    //Category
+    $methods = ['index', 'edit', 'store', 'update', 'create', 'show', 'destroy'];
+    Route::resource('categories', 'CategoryController')
+        ->only($methods)
+        ->names('museum.admin.categories');
+
+    //Post
+    Route::resource('posts', 'PostController')
+        ->except(['show'])
+        ->names('museum.admin.posts');
 });
 
 

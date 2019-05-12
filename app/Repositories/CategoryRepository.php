@@ -29,19 +29,19 @@ class CategoryRepository extends CoreRepository
     {
         //return $this->startConditions()->all();
 
-        $fields = implode(', ', [
+        $columns = implode(', ', [
             'id',
             'CONCAT (id, ". ", title) AS id_title'
         ]);
 
-        $result[] = $this->startConditions()->all();
-        $result[] = $this->startConditions()
-            ->select('categories.*', \DB::raw('CONCAT (id, ". ", title) AS id_title'))
-            ->toBase()
-            ->get();
+//        $result[] = $this->startConditions()->all();
+//        $result[] = $this->startConditions()
+//            ->select('categories.*', \DB::raw('CONCAT (id, ". ", title) AS id_title'))
+//            ->toBase()
+//            ->get();
 
-        $result[] = $this->startConditions()
-            ->selectRaw($fields)
+        $result = $this->startConditions()
+            ->selectRaw($columns)
             ->toBase()
             ->get();
 
