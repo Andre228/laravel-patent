@@ -53,7 +53,9 @@ class CategoryRepository extends CoreRepository
     {
         $columns = ['id', 'title', 'parent_id'];
 
-        $result = $this->startConditions()->select($columns)->paginate($perPage);
+        $result = $this->startConditions()
+            ->select($columns)
+            ->paginate($perPage);
 
         return $result;
     }

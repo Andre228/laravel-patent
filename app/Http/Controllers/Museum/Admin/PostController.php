@@ -28,7 +28,9 @@ class PostController extends BaseController
 
     public function index()
     {
-        return view('museum.admin.post.index');
+        $paginator = $this->postRepository->getAllWithPaginate();
+
+        return view('museum.admin.post.index', compact('paginator'));
     }
 
     /**
