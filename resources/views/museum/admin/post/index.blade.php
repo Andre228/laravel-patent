@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
          <div class="col-md-12">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-               <a class="btn btn-dark" href="{{route('museum.admin.posts.create')}}">Создать</a>
+               <a class="btn btn-dark" href="{{route('museum.admin.posts.create')}}">Добавить</a>
             </nav>
             <div class="card admin-card-field">
                <div class="card-body">
