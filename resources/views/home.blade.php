@@ -14,8 +14,22 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! {{Auth::user()->name}}
+                    Вы зарегестрированы: {{Auth::user()->created_at}}
                 </div>
+
+                @if(session('success'))
+                    <div class="row justify-content-center success-block">
+                        <div class="col-md-11">
+                            <div class="alert alert-success" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                                <div>{{ session()->get('success') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

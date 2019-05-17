@@ -3,9 +3,9 @@
 
     <div class="col">
         <div class="collapse multi-collapse" id="multiCollapseExample1">
-            <input type="file" name="image" class=" row justify-content-center">
+            <input type="file" name="image" class="btn btn-dark">
 
-
+    @if(!$imagelist->isEmpty())
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top: 25px">
                 <ol class="carousel-indicators">
 
@@ -17,15 +17,19 @@
 
                 <div class="carousel-inner">
 
-                        <div class="carousel-item @if($imagelist[0]!=null) active @endif" style="height: 500px">
-                            <img class="d-block w-100" src="{{asset('/storage/' . $imagelist[0])}}" alt="First slide">
-                        </div>
-
-
                     @if(count($imagelist) > 0)
-                        @for($i = 1; $i < count($imagelist); $i++)
-                            <div class="carousel-item" style="height: 500px">
-                                <img class="d-block w-100" src="{{asset('/storage/' . $imagelist[$i])}}" alt="Second slide">
+                        @for($i = 0; $i < count($imagelist); $i++)
+                            <div class="carousel-item @if($i === 0) active @endif" style="height: 500px" >
+                                <form method="POST" id="destroy-form" action="{{route('museum.admin.images.destroy', $imagelist[$i]->id)}}">
+                                    @method('DELETE')
+                                    @csrf
+
+                                    <button type="submit" style="margin-left: 300px"  aria-hidden="true">
+                                        <i class="fas fa-trash-alt fa-2x"></i>
+                                    </button>
+
+                                </form>
+                                <img class="d-block w-100 h-100" src="{{asset('/storage/' . $imagelist[$i]->alias)}}" alt="Second slide">
                             </div>
                         @endfor
                     @endif
@@ -40,6 +44,12 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+    @endif
         </div>
     </div>
 </div>
+
+
+<script>
+
+</script>

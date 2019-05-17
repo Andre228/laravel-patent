@@ -29,9 +29,9 @@
                            <td> {{ $post->user->name }} </td>
                            <td> {{ $post->category->title }} </td>
                            <td>
-                              <a style="color: white" href="{{route('museum.admin.posts.edit',$post->id)}}"> {{$post->title}} </a>
+                              <a style="color: white" href="{{route('museum.admin.posts.edit',$post->id)}}"> {{$post->title}}</a>
                            </td>
-                           <td> {{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d.M.Y H:i'):'' }} </td>
+                           <td>{{ $post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d.M.Y H:i'):'' }}</td>
                         </tr>
                      @endforeach
                      </tbody>

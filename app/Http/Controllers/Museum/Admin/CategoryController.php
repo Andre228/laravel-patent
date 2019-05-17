@@ -66,13 +66,6 @@ class CategoryController extends BaseController
     public function store(MuseumCategoryCreateRequest $request)
     {
         $data = $request->input();
-        if(empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-
-//        $item = new Category($data);
-//        $item->save();
-
         $item = (new Category())->create($data);
 
         if($item) {

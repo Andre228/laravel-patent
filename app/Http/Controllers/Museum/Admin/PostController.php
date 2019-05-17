@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Museum\Admin;
 
+use App\Http\Requests\MuseumPostCreateRequest;
 use App\Http\Requests\MuseumPostUpdateRequest;
 use App\Image;
+use App\Models\Post;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Repositories\PostRepository;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Support\Str;
 
 class PostController extends BaseController
 {
@@ -49,7 +49,10 @@ class PostController extends BaseController
      */
     public function create()
     {
-        //
+        $item = new Post();
+        $categoryList = $this->categoryRepository->getForComboBox();
+
+        return view('museum.admin.post.add.create', compact('item','categoryList'));
     }
 
     /**
@@ -58,9 +61,17 @@ class PostController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(MuseumPostCreateRequest $request)
     {
+        $data = $request->input();
+        $item = (new Post())->create($data);
 
+        if($item) {
+            return redirect()->route('museum.admin.posts.edit', $item->id)->with(['success' => 'Успешно сохранено']);
+        }
+        else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
+        }
     }
 
     /**
@@ -82,18 +93,16 @@ class PostController extends BaseController
      */
     public function edit($id)
     {
-        $url = \App\Models\Image::where('post_id', $id)->pluck('alias');
+        $url = DB::table('images')->select('alias','id')->where('post_id', $id)->get();
 
-       // dd($url);
-       // $link = null;
-       // dd($url);
-       // dd($url);
 
-      //  $urltext = Storage::url('storage/123.jpg');
+       if($url->isEmpty())
+           $imagelist = null;
+
+
         if(empty($url)!== null)
         $imagelist = $url;
 
-       // dd($imagelist);
 
         $item = $this->postRepository->getEdit($id);
         if(empty($item)) {
@@ -101,8 +110,6 @@ class PostController extends BaseController
         }
 
         $categoryList = $this->categoryRepository->getForComboBox();
-
-       // return view('viewName', );
 
         return view('museum.admin.post.update.edit', ['item'=>$item,'categoryList'=>$categoryList,'imagelist'=>$imagelist]);
     }
@@ -116,27 +123,27 @@ class PostController extends BaseController
      */
     public function update(MuseumPostUpdateRequest $request, $id)
     {
-        $filename = Input::file('image')->getClientOriginalName();
+        if(!empty(Input::file('image'))) {
+            $filename = Input::file('image')->getClientOriginalName();
 
-        $path = Storage::disk('public')->putFileAs(
-            'images/posts'.'/' . $id , $request->file('image'), $filename
-        );
+            $path = Storage::disk('public')->putFileAs(
+                'images/posts' . '/' . $id, $request->file('image'), $filename
+            );
 
 //        $path = public_path('uploads/image/');
 //        $file_name = time() . "_" . Input::file('image')->getClientOriginalName();
 //        Input::file('image')->move($path, $file_name);
 
 
+            $data = array(
+                'post_id' => $id,
+                'name' => $filename,
+                'alias' => $path,
+            );
 
-
-        $data = array(
-            'post_id' => $id,
-            'name' => $filename,
-            'alias' => $path,
-        );
-
-        $imgobject = new \App\Models\Image();
-        $imgobject->create($data);
+            $imgobject = new \App\Models\Image();
+            $imgobject->create($data);
+        }
 
 
         $item = $this->postRepository->getEdit($id);
@@ -147,13 +154,6 @@ class PostController extends BaseController
        }
 
        $data = $request->all();
-
-        if(empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-        if(empty($item->published_at) && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }
 
         $result = $item->update($data);
 

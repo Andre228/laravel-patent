@@ -28,7 +28,7 @@
                     <div class="tab-pane active" id="maindata" role="tabpanel">
                         <div class="form-group">
                             <label for="title">Заголовок</label>
-                            <input name="title" id="title" type="text" value="{{$item->title}}"
+                            <input name="title" id="title" type="text" value="{{old('title',$item->title)}}"
                                    class="form-control admin-field admin-table-text" minlength="3" required/>
                         </div>
                         <div class="form-group">

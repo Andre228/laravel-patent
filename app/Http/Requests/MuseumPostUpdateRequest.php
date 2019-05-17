@@ -32,7 +32,7 @@ class MuseumPostUpdateRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:200',
-            'slug' => 'max:200',
+            'slug' => 'max:200|',
             'excerpt' => 'max:500',
             'content_raw' => 'required|string|max:10000|min:5',
             'category_id' => 'required|integer|exists:categories,id'

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-
+    <link href="{{ asset('css/Museum/AdminBlocks/blocks.css') }}" rel="stylesheet">
 </head>
 
 
@@ -26,11 +26,15 @@
                 <div class="col-md-3">
                     @include('museum.admin.post.includes.edit.post_edit_add_col')
                 </div>
-                <div class="col-md-10">
-                    @include('museum.admin.post.includes.carousel_with_images')
-                </div>
+
             </div>
         </form>
+
+        <div class="col-md-8 image-content">
+            @include('museum.admin.post.includes.carousel_with_images')
+        </div>
+
+
 
         @if($item->exists)
             <br>

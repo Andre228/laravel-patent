@@ -76,9 +76,9 @@
                     Laravel
                 </div>
                 <div class="links">
-                    <a href="/museum/posts">Экспонаты</a>
-                    <a href="/admin/museum/posts">Посты(Админ)</a>
-                    <a href="/admin/museum/categories">Категории(Админ)</a>
+                   @if(Auth::check())
+                        <a href="/museum/posts">Экспонаты</a>
+                   @endif
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
