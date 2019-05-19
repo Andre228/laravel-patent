@@ -12,4 +12,10 @@ class Image extends Model
         'name',
         'alias',
     ];
+
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
+    }
 }

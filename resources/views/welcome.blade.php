@@ -13,7 +13,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                /*background-color: #fff;*/
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -64,6 +64,7 @@
             }
         </style>
         <script src="{{asset('js/app.js')}}" defer></script>
+        <link href="{{ asset('css/Museum/Welcome/welcomeposts.css') }}" rel="stylesheet">
     </head>
     <body>
 
@@ -71,7 +72,7 @@
 
     @section('content')
 
-            <div class="content">
+            <div class="content col-md-12 justify-content-center">
                 <div class="title m-b-md">
                     Laravel
                 </div>
@@ -86,7 +87,78 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
 
                 </div>
+
+                <div class="col">
+                    @for($i = 0; $i < count($listwelcomeposts); $i++)
+                    <div  class="row welcome-posts justify-content-center">
+                        <div class="col-md-5 text-pull-right">
+                           <a href="#" style="color: white">
+                                <h2 class="title-welcome">{{$listwelcomeposts[$i]['title']}}
+                                    {{--<span class="text-muted">It'll blow your mind.</span>--}}
+                                </h2>
+                           </a>
+                            <p class="lead excerpt-animation ">{{$listwelcomeposts[$i]['excerpt']}}</p>
+                        </div>
+                        @if(!empty($aliasfiltred[$i]['alias']))
+                            <div class="col-md-5">
+                                <img  class="image-welcome-right"  width="400px" height="300px" src="{{asset('/storage/' . $aliasfiltred[$i]['alias'])}}" alt="500x500">
+                            </div>
+
+                        @else
+                            <div class="col-md-5" style="font-size: 30px">
+                                <span class="text-muted"> Здесь нет картинок :( </span>
+                            </div>
+                        @endif
+                    </div>
+                        <hr class="col-md-10">
+
+                <?php $i++ ?>
+                    <div  class="row justify-content-center welcome-posts ">
+                        @if(!empty($aliasfiltred[$i]['alias']))
+                            <div class="col-md-5">
+                                <img class="image-welcome-left"  width="400px" height="300px" src="{{asset('/storage/' . $aliasfiltred[$i]['alias'])}}" alt="500x500">
+                            </div>
+
+                        @else
+                            <div class="col-md-5" style="font-size: 30px">
+                               <span class="text-muted"> Здесь нет картинок :( </span>
+                            </div>
+                        @endif
+                        <div class="col-md-5 text-pull-left block-image-left ">
+                            <a href="#" style="color: white">
+                                <h2 class="title-welcome">{{$listwelcomeposts[$i]['title']}}
+                                    {{--<span class="text-muted">It'll blow your mind.</span>--}}
+                                </h2>
+                            </a>
+                            <p class="lead excerpt">{{$listwelcomeposts[$i]['excerpt']}}</p>
+                        </div>
+                    </div>
+                        <hr class="col-md-10">
+                    @endfor
+
+
+                    <footer class="col-md-10">
+                        <p class="pull-right">
+                            <a href="#">Наверх</a>
+                        </p>
+
+                        <p class="pull-left">
+                            © 2019 Company, Inc. ·
+                            <a href="#">Privacy</a>
+                            ·
+                            <a href="#">Terms</a>
+                        </p>
+                    </footer>
+                </div>
             </div>
+
+
     @endsection
     </body>
 </html>
+
+
+<script>
+
+
+</script>

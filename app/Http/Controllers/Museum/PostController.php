@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers\Museum;
 
+use Request;
 use App\Models\Post;
-use Illuminate\Http\Request;
+use App\Repositories\CategoryRepository;
+use App\Repositories\PostRepository;
 
 class PostController extends BaseController
 {
+
+
+    private $postRepository;
+    private $categoryRepository;
+
+    public function __construct()
+    {
+      //  parent::__construct();
+
+        $this->postRepository = app(PostRepository::class);
+        $this->categoryRepository = app(CategoryRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +29,9 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = Post::all();
-        return view('museum.posts.index', compact('posts'));
+
+        $paginator = $this->postRepository->getAllWithPaginateForUsers(31);
+        return view('museum.posts.index', compact('paginator'));
         //
     }
 
@@ -83,5 +99,13 @@ class PostController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function showWithCountPosts(Request $request)
+    {
+        $count = Request::input('countpaginate');
+        $paginator = $this->postRepository->getAllWithPaginateForUsers($count);
+        return view('museum.posts.index', compact('paginator'));
+
     }
 }

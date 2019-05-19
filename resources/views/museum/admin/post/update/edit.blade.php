@@ -19,6 +19,7 @@
             @method('PATCH')
             @csrf
             <div class="row justify-content-center">
+
                 <div class="col-md-8">
                     @include('museum.admin.post.includes.edit.post_edit_main_col')
                 </div>
@@ -30,7 +31,7 @@
             </div>
         </form>
 
-        <div class="col-md-8 image-content">
+        <div class=" image-content">
             @include('museum.admin.post.includes.carousel_with_images')
         </div>
 
@@ -61,9 +62,5 @@
 
 
 <script>
-
-
-
-
 
 </script>

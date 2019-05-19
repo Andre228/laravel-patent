@@ -1,0 +1,150 @@
+.welcome-posts {
+    margin-top: 100px;
+
+    /*padding-right: 150px;*/
+}
+
+.image-welcome-right {
+    margin-right: 100px;
+}
+
+.image-welcome-left {
+    margin-left: 100px;
+}
+
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+    margin-left: 175px;
+}
+
+.title-welcome {
+    font-size: 40px;
+}
+
+.text-pull-right {
+    color: white;
+    width: 600px;
+    margin-left: 100px;
+    text-align: right;
+    border-radius: 1em;
+    background: #6d6d6d;
+    -webkit-transition: all 0.3s ease;;
+    -moz-transition: all 0.3s ease;;
+    -o-transition: all 0.3s ease;;
+    transition: all 0.3s ease;
+}
+.text-pull-right:hover {
+    background:#c0e5d3;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.text-pull-left {
+    color: white;
+    width: 600px;
+    margin-right: 100px;
+    text-align: left;
+    border-radius: 1em;
+    background: #6d6d6d;
+    -webkit-transition: all 0.3s ease;;
+    -moz-transition: all 0.3s ease;;
+    -o-transition: all 0.3s ease;;
+    transition: all 0.3s ease;
+
+}
+.text-pull-left:hover {
+    background:#c0e5d3;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.footer {
+   color: #5a6268;
+}
+
+
+@keyframes go-left-right {
+    from {
+        left: 0px;
+    }
+    to {
+        left: calc(100% - 50px);
+    }
+}
+
+
+
+.excerpt-animation {
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+}
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 75%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+
+
+
+body {
+    animation: colorchange 50s infinite; /* animation-name followed by duration in seconds*/
+    /* you could also use milliseconds (ms) or something like 2.5s */
+    -webkit-animation: colorchange 50s infinite; /* Chrome and Safari */
+}
+
+@keyframes colorchange
+{
+    0% {background: #f9edf8}
+    /*0%   {background: #f9d6f2;}*/
+    25%  {background: #fffde8;}
+    50%  {background: #c4e7fc;}
+    75%  {background: #c0e5d3;}
+    /*100% {background: #f9d6f2;}*/
+    100% {background: #f9edf8;}
+}
+
+@-webkit-keyframes colorchange /* Safari and Chrome - necessary duplicate */
+{
+    0% {background: #f9edf8}
+    /*0%   {background: #f9d6f2;}*/
+    25%  {background: #fffde8;}
+    50%  {background: #c4e7fc;}
+    75%  {background: #c0e5d3;}
+    /*100% {background: #f9d6f2;}*/
+    100% {background: #f9edf8;}
+}
+
+.post-block {
+    width:  100%;
+    border: 1em solid black;
+
+}
+
+
+
+
+
+
+
+.block-image-left:hover .excerpt {
+    color: #fff;
+    font-size: 3em;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}

@@ -7,11 +7,8 @@ use App\Http\Requests\MuseumPostUpdateRequest;
 use App\Image;
 use App\Models\Post;
 use App\Repositories\CategoryRepository;
-use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends BaseController
 {
@@ -111,6 +108,7 @@ class PostController extends BaseController
 
         $categoryList = $this->categoryRepository->getForComboBox();
 
+
         return view('museum.admin.post.update.edit', ['item'=>$item,'categoryList'=>$categoryList,'imagelist'=>$imagelist]);
     }
 
@@ -123,28 +121,6 @@ class PostController extends BaseController
      */
     public function update(MuseumPostUpdateRequest $request, $id)
     {
-        if(!empty(Input::file('image'))) {
-            $filename = Input::file('image')->getClientOriginalName();
-
-            $path = Storage::disk('public')->putFileAs(
-                'images/posts' . '/' . $id, $request->file('image'), $filename
-            );
-
-//        $path = public_path('uploads/image/');
-//        $file_name = time() . "_" . Input::file('image')->getClientOriginalName();
-//        Input::file('image')->move($path, $file_name);
-
-
-            $data = array(
-                'post_id' => $id,
-                'name' => $filename,
-                'alias' => $path,
-            );
-
-            $imgobject = new \App\Models\Image();
-            $imgobject->create($data);
-        }
-
 
         $item = $this->postRepository->getEdit($id);
 

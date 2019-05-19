@@ -30,8 +30,16 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel museum-navbar">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand btn btn-info text-white" href="{{ url('/') }}">
                     На главную
+                </a>
+
+                <a class="navbar-brand btn btn-outline-primary text-white" href="{{ url('/') }}">
+                    Новости
+                </a>
+
+                <a class="navbar-brand btn btn-outline-primary text-white" href="{{ route('museum.about') }}">
+                    О нас
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -62,30 +70,26 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                @if(Auth::check() && Auth::user()->role === 'admin')
 
+                                @if(Auth::check())
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Выйти') }}
+                                        </a>
+                                        @if( Auth::user()->role === 'admin')
+                                            <a class="dropdown-item" href="/admin/museum/posts">Статьи</a>
+                                            <a class="dropdown-item" href="/admin/museum/categories">Категории</a>
+                                        @endif
+                                        <a class="dropdown-item" href="{{ route('home') }}">
+                                            <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}
+                                        </a>
 
-
-
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Выйти') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="/admin/museum/posts">Статьи</a>
-                                    <a class="dropdown-item" href="/admin/museum/categories">Категории</a>
-
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
                                 @endif
                             </li>
                         @endguest

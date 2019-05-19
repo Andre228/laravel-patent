@@ -11,13 +11,41 @@
 |
 */
 
+use App\Models\Image;
+use App\Repositories\PostRepository;
+use App\Http\Controllers\Museum\PostController;
+
 Route::get('/', function () {
-    return view('welcome');
-});
+
+    $postRepository = app(PostRepository::class);
+
+    $listwelcomeposts = $postRepository->getNewPosts();
+
+    for($i=0; $i < count($listwelcomeposts); $i++){
+        $id[] = $listwelcomeposts[$i]['id'];
+    }
+
+    $image = new Image();
+
+    for($i=0; $i < count($id); $i++) {
+        $alias[] = $image
+            ->select('alias')
+            ->where('post_id', $id[$i])
+            ->limit(1)
+            ->get()
+            ->toArray();
+    }
+
+    for($i=0; $i < count($alias); $i++) {
+        if(!empty($alias[$i][0]))
+        $aliasfiltred[] = $alias[$i][0];
+    }
+    return view('welcome', compact('aliasfiltred', 'listwelcomeposts'));
+})->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 
 
@@ -38,13 +66,26 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
-   Route::resource('posts', 'PostController')->names('museum.posts');
+   $methods = ['index', 'edit', 'store', 'update', 'create', 'show', 'destroy'];
+
+   Route::resource('posts', 'PostController')->names('museum.posts')->middleware('auth');
+
+
+
 });
+
+Route::get('posts/count', 'Museum\PostController@showWithCountPosts')
+    ->name('museum.show.count')
+    ->middleware('auth');
+
+Route::get('/about', 'HomeController@about')
+    ->name('museum.about');
 
 
 $groupData = [
     'namespace' => 'Museum\Admin',
     'prefix' => 'admin/museum',
+    'middleware' => ['admin']
 ];
 
 Route::group($groupData, function () {
@@ -57,7 +98,7 @@ Route::group($groupData, function () {
 
     //Image
     Route::resource('images', 'ImageController')
-        ->only('destroy')
+        ->only('destroy','update')
         ->names('museum.admin.images');
 
     //Post
