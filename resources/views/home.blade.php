@@ -1,37 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link href="{{ asset('css/Museum/Profile/user.css') }}" rel="stylesheet">
+</head>
+
+
+
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    You are logged in! {{Auth::user()->name}}
-                    Вы зарегестрированы: {{Auth::user()->created_at}}
+
+
+<div class="container emp-profile">
+    <form method="POST" action="{{route('dashboard.edit', $user['id'])}}" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf
+        <div class="row">
+
+            <div class="col-md-6" style="height: 110px">
+                <div class="profile-head">
+                    <h5>
+                        {{$user['name']}}
+                    </h5>
+                    <h6 style="margin-top: 20px; margin-bottom: 20px">
+                         Ваш профиль
+                    </h6>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Информация</a>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Сохранить"/>
+            </div>
 
-                @if(session('success'))
-                    <div class="row justify-content-center success-block">
-                        <div class="col-md-11">
-                            <div class="alert alert-success" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">x</span>
-                                </button>
-                                <div>{{ session()->get('success') }}</div>
+
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>Вы зарегестрированы {{$user['created_at'] ? \Carbon\Carbon::parse($user['created_at'])->format('d.M.Y'):''}}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="name" style="margin-top: 40px">Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+
+                                <div class="page">
+                                    <div class="page__demo">
+                                        <label class="field a-field a-field_a1 page__field">
+                                            <input class="field__input a-field__input" name="name" value="{{old('name',$user['name'])}}" placeholder="Ваш логин"  required>
+                                            <span class="a-field__label-wrap">
+                                                <span class="a-field__label">Введите ваш логин</span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="email" style="margin-top: 40px">Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+
+                                    <label class="field a-field a-field_a3 page__field">
+                                        <input name="email" value="{{old('email', $user['email'])}}" class="field__input a-field__input" placeholder="Ваш email" required>
+                                        <span class="a-field__label-wrap">
+                                            <span class="a-field__label">Email</span>
+                                        </span>
+                                    </label>
+
+                                </p>
                             </div>
                         </div>
                     </div>
-                @endif
+                </div>
             </div>
+            @if(!empty($alias->alias))
+            <div class="col-md-4" style="margin-left: 130px">
+                <div class="profile-img">
+                    <img height="265px" width="350px" src="{{asset('/storage/' . $alias->alias)}}" alt=""/>
+                    <div class="file btn btn-lg btn-primary">
+                        Изменить
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+            </div>
+            @else
+                <div class="col-md-4" style="margin-left: 130px">
+
+                    <div class="profile-img">
+                        Здесь пока что нет фото :(
+                        <div class="file btn btn-lg btn-primary" style="margin-top: 50px">
+                                Добавить
+                            <input type="file" name="file"/>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
-    </div>
+
+    </form>
+    @include('museum.admin.post.includes.result_messages')
 </div>
+
+
 @endsection
+
+
+
+<script>
+
+
+
+
+</script>

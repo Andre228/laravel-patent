@@ -1,19 +1,149 @@
-.museum-navbar {
-    /*background: radial-gradient(circle farthest-corner at 100px 50px,#EC4451, #F4497E);*/
-   /* background: linear-gradient(to right, #F6EFD2, #CEAD78);*/
-    font-size: 28px;
-    background: radial-gradient(circle farthest-corner at 100px 50px, #577A99, #395177);
-    height: 90px;
+code {
+    background-color: #ddd;
+}
+.contentWrap {
+    padding: 2em;
+}
+.content {
+    width: 650px;
+    margin: 0 auto;
+    min-height: 1250px;
+    line-height: 1.5em;
+}
+h1 {
+    font-size: 2em;
+    line-height: 2em;
 }
 
-.navbar-museum-style-text:hover {
-
-    color:whitesmoke;
-    font-size: 35px;
-    transition: 0.3s;
-    /*text-decoration: underline;*/
+/*** Styles for the main header ***/
+#main {
+    background-color: #eee;
+    position: relative;
+    z-index: 1001;
 }
-.nav-item a:hover {
-    color:whitesmoke;
-    color:white;
+.ul-header.nav {
+    padding-left: 0;
+}
+.ul-header.nav {
+    width: 650px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.ul-header.nav .li-header {
+    float: left;
+    list-style: none;
+    margin: .5em .5em .5em 0;
+    padding: .5em .5em .5em 0;
+    font-size: 1.5em;
+}
+.ul-header.nav .li-header .link-header {
+    text-decoration: none;
+    color: #ccc;
+}
+.ul-header.nav .li-header .link-header:hover {
+    color: #E0461B;
+    transition: color 400ms ease-out;
+}
+
+/*** Styles for the sticky header ***/
+#stickyContent {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #E0461B;
+}
+#stickyContent .ul-header.nav .li-header {
+    font-size: 1em;
+}
+#stickyContent .ul-header.nav .link-header {
+    color: #612717;
+}
+#stickyContent .ul-header.nav .text{
+    display: none;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+section{
+    text-align:center;
+}
+.footer #button{
+    width:35px;
+    height:35px;
+    border: azure 8px solid;
+    border-radius:35px;
+    margin:0 auto;
+    position:relative;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.footer #button:hover{
+    width:35px;
+    height:35px;
+    border: azure 8px solid;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    position:relative;
+}
+.footer {
+    bottom:0;
+    left:0;
+    position:fixed;
+    width: 100%;
+    height: 2em;
+    overflow:hidden;
+    margin:0 auto;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    z-index:999;
+}
+.footer:hover {
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+    height: 10em;
+}
+.footer #container{
+    margin-top:5px;
+    width:100%;
+    height:100%;
+    position:relative;
+    top:0;
+    left:0;
+    background: #3A3A3A;
+}
+.footer #cont{
+    position:relative;
+    top:-45px;
+    right:190px;
+    width:150px;
+    height:auto;
+    margin:0 auto;
+}
+.footer_center{
+    width:500px;
+    float:left;
+    text-align:center;
+}
+.footer h3{
+    font-family: 'Helvetica';
+    font-size: 30px;
+    font-weight: 100;
+    margin-top:70px;
+    margin-left:40px;
 }

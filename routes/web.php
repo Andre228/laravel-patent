@@ -46,6 +46,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::put('/home/{id}', 'HomeController@update')->name('dashboard.edit')->middleware('auth');
 
 
 
@@ -66,10 +67,10 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 
 Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
-   $methods = ['index', 'edit', 'store', 'update', 'create', 'show', 'destroy'];
 
-   Route::resource('posts', 'PostController')->names('museum.posts')->middleware('auth');
-
+   Route::resource('posts', 'PostController')
+       ->names('museum.posts')
+       ->middleware('auth');
 
 
 });
@@ -80,6 +81,7 @@ Route::get('posts/count', 'Museum\PostController@showWithCountPosts')
 
 Route::get('/about', 'HomeController@about')
     ->name('museum.about');
+
 
 
 $groupData = [

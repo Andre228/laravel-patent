@@ -27,7 +27,7 @@
                 <div class="row">
                 @foreach($paginator as $post)
 
-                        @if($post->published_at)
+                        @if($post->is_published)
                             <div class="card text-white bg-dark mb-3" style="max-width: 265px; width:265px; margin-left: 15px">
                                 <div class="card-header">Дата: {{$post->created_at ? \Carbon\Carbon::parse($post->created_at)->format('d.M.Y H:i'):''}}</div>
 
@@ -35,7 +35,7 @@
                                     <h5 class="card-title">{{$post->title}}</h5>
                                     <p class="card-text">{{$post->excerpt}}</p>
                                 </div>
-                            <p><a class="btn btn-dark" href="#" role="button">Посмотреть детали</a></p>
+                            <p><a class="btn btn-dark" href="{{ route('museum.posts.show', $post->id) }}" role="button">Посмотреть детали</a></p>
                             </div>
                         @endif
 

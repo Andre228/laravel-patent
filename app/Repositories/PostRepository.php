@@ -99,4 +99,26 @@ class PostRepository extends CoreRepository
 
     }
 
+    public function showPost($id)
+    {
+
+        $columns = [
+            'id',
+            'title',
+            'excerpt',
+            'published_at',
+            'updated_at',
+            'content_raw'
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->find($id)
+            ->toArray();
+
+
+        return $result;
+
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Museum;
 
+use App\Models\Image;
 use Request;
 use App\Models\Post;
 use App\Repositories\CategoryRepository;
@@ -64,7 +65,17 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        //
+        $post = $this->postRepository->showPost($id);
+
+        $image = new Image();
+        $alias = $image
+            ->select('alias')
+            ->where('post_id', $post['id'])
+            ->limit(1)
+            ->get()
+            ->toArray();
+
+        return view('museum.posts.show', compact('post','alias'));
     }
 
     /**
