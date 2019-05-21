@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Museum;
 
 use App\Models\Image;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 use Request;
 use App\Models\Post;
 use App\Repositories\CategoryRepository;
@@ -69,9 +71,8 @@ class PostController extends BaseController
 
         $image = new Image();
         $alias = $image
-            ->select('alias')
+            ->select('alias','name')
             ->where('post_id', $post['id'])
-            ->limit(1)
             ->get()
             ->toArray();
 

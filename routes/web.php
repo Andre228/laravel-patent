@@ -46,6 +46,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Route::get('/contact', 'HomeController@contact')->name('contact')->middleware('auth');
 Route::put('/home/{id}', 'HomeController@update')->name('dashboard.edit')->middleware('auth');
 
 
@@ -107,6 +108,11 @@ Route::group($groupData, function () {
     Route::resource('posts', 'PostController')
         ->except(['show'])
         ->names('museum.admin.posts');
+
+    //User
+    Route::resource('users', 'UserController')
+        ->except(['show','create'])
+        ->names('museum.admin.users');
 });
 
 

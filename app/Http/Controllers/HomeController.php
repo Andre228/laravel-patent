@@ -77,4 +77,10 @@ class HomeController extends Controller
     {
         return view('museum.about');
     }
+
+
+    public function contact()
+    {
+        return view('museum.contact');
+    }
 }

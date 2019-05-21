@@ -23,6 +23,26 @@ class UsersRepository extends CoreRepository
         return Model::class;
     }
 
+
+    public function getAllWithPaginate()
+    {
+        $columns = [
+            'id',
+            'name',
+            'email',
+            'role',
+            'created_at',
+            'updated_at',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->orderBy('id','DESC')
+            ->paginate(25);
+
+        return $result;
+    }
+
     public function getUserInfo($id)
     {
         $columns = [

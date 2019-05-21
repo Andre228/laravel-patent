@@ -66,7 +66,7 @@
             </li>
 
             <li class="li-header">
-                <a class="link-header" href="javascript://" title="Contact">
+                <a class="link-header" href="{{route('contact')}}" title="Contact">
                   <span class="icon-stack">
                     <i class="fas fa-phone"></i>
                   </span>
@@ -143,6 +143,7 @@
                                         @if( Auth::user()->role === 'admin')
                                             <a class="dropdown-item" href="/admin/museum/posts"><i class="fas fa-clipboard"></i> Статьи</a>
                                             <a class="dropdown-item" href="/admin/museum/categories"><i class="fas fa-layer-group"></i> Категории</a>
+                                            <a class="dropdown-item" href="{{route('museum.admin.users.index')}}"><i class="fas fa-users"></i> Пользователи</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}

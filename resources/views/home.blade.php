@@ -12,9 +12,6 @@
 
 @section('content')
 
-
-
-
 <div class="container emp-profile">
     <form method="POST" action="{{route('dashboard.edit', $user['id'])}}" enctype="multipart/form-data">
         @method('PUT')
@@ -52,7 +49,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="name" style="margin-top: 40px">Name</label>
+                                <label for="name" style="margin-top: 40px">Логин</label>
                             </div>
                             <div class="col-md-6">
                                 <p>
@@ -60,9 +57,9 @@
                                 <div class="page">
                                     <div class="page__demo">
                                         <label class="field a-field a-field_a1 page__field">
-                                            <input class="field__input a-field__input" name="name" value="{{old('name',$user['name'])}}" placeholder="Ваш логин"  required>
+                                            <input onfocus="loginUp()" id="login" class="field__input a-field__input" name="name" value="{{old('name',$user['name'])}}" placeholder="Ваш логин"  required>
                                             <span class="a-field__label-wrap">
-                                                <span class="a-field__label">Введите ваш логин</span>
+                                                <span id="login_up" class="a-field__label">Введите ваш логин</span>
                                             </span>
                                         </label>
                                     </div>
@@ -80,9 +77,9 @@
                                 <p>
 
                                     <label class="field a-field a-field_a3 page__field">
-                                        <input name="email" value="{{old('email', $user['email'])}}" class="field__input a-field__input" placeholder="Ваш email" required>
+                                        <input onfocus="emailUp()" id="email" name="email" value="{{old('email', $user['email'])}}" class="field__input a-field__input" placeholder="Ваш email" required>
                                         <span class="a-field__label-wrap">
-                                            <span class="a-field__label">Email</span>
+                                            <span id="email_up" class="a-field__label">Email</span>
                                         </span>
                                     </label>
 
@@ -127,7 +124,19 @@
 
 <script>
 
+function loginUp() {
+    var login_up  = document.getElementById('login_up');
+    var login  = document.getElementById('login');
 
+    login_up.innerHTML = login.value;
+}
+
+function emailUp() {
+    var email_up  = document.getElementById('email_up');
+    var email  = document.getElementById('email');
+
+    email_up.innerHTML = email.value;
+}
 
 
 </script>

@@ -97,6 +97,10 @@ class PostRepository extends CoreRepository
 
         return $result;
 
+//        select p.id, p.title, p.excerpt, p.published_at, p.post_id
+//from posts p JOIN images i on p.id = i.post_id
+//where p.is_published = 1 and p.deleted_at is null ORDER by p.published_at desc limit 4
+
     }
 
     public function showPost($id)

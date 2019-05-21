@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.13 on 2019-04-18 17:31:54.
+ * Generated for Laravel 5.8.15 on 2019-05-21 13:08:13.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -4595,7 +4595,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Determine if the connection in a "dry run".
+         * Determine if the connection is in a "dry run".
          *
          * @return bool 
          * @static 
@@ -7885,6 +7885,20 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Support\Testing\Fakes\QueueFake $instance */
                         return $instance->setConnectionName($name);
+        }
+        
+        /**
+         * Get the retry delay for an object-based queue handler.
+         *
+         * @param mixed $job
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getJobRetryDelay($job)
+        {
+            //Method inherited from \Illuminate\Queue\Queue            
+                        /** @var \Illuminate\Queue\SyncQueue $instance */
+                        return $instance->getJobRetryDelay($job);
         }
         
         /**
@@ -15109,6 +15123,75 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = array())
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -17642,6 +17725,30 @@ namespace  {
             }
          
             /**
+             * Dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dump()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dump();
+            }
+         
+            /**
+             * Die and dump the current SQL and bindings.
+             *
+             * @return void 
+             * @static 
+             */ 
+            public static function dd()
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                $instance->dd();
+            }
+         
+            /**
              * Register a custom macro.
              *
              * @param string $name
@@ -17739,6 +17846,8 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
  
 }
 
