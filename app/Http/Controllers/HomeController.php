@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Museum\BaseController;
+use App\Repositories\ContactRepository;
 use App\Repositories\UsersRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,10 +21,12 @@ class HomeController extends Controller
      */
 
     private $usersRepository;
+    private $contactRepository;
 
     public function __construct()
     {
         $this->usersRepository = app(UsersRepository::class);
+        $this->contactRepository = app(ContactRepository::class);
         $this->middleware('auth');
     }
 
@@ -81,6 +84,10 @@ class HomeController extends Controller
 
     public function contact()
     {
-        return view('museum.contact');
+        $item = $this->contactRepository->getAllFields();
+
+        $partners = DB::table('partners')->select('name','link')->get();
+
+        return view('museum.contact', compact('item','partners'));
     }
 }

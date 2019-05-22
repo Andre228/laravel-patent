@@ -144,6 +144,8 @@
                                             <a class="dropdown-item" href="/admin/museum/posts"><i class="fas fa-clipboard"></i> Статьи</a>
                                             <a class="dropdown-item" href="/admin/museum/categories"><i class="fas fa-layer-group"></i> Категории</a>
                                             <a class="dropdown-item" href="{{route('museum.admin.users.index')}}"><i class="fas fa-users"></i> Пользователи</a>
+                                            <a class="dropdown-item" href="{{route('museum.admin.contact.edit', 1)}}"><i class="fas fa-phone"></i> Связь</a>
+                                            <a class="dropdown-item" href="{{route('museum.admin.partners.index')}}"><i class="fas fa-handshake"></i> Партнеры</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}

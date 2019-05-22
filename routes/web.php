@@ -113,6 +113,16 @@ Route::group($groupData, function () {
     Route::resource('users', 'UserController')
         ->except(['show','create'])
         ->names('museum.admin.users');
+
+    //Contact
+    Route::resource('contact', 'ContactController')
+        ->except(['show','create'])
+        ->names('museum.admin.contact');
+
+    //Partners
+    Route::resource('partners', 'PartnersController')
+        ->except(['show'])
+        ->names('museum.admin.partners');
 });
 
 

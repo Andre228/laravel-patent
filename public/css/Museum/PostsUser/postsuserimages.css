@@ -1,0 +1,14 @@
+.gallery3 {
+    width: 480px;
+    overflow: hidden;
+}
+.gallery3 .ramka {
+    float: left;
+    overflow: hidden;
+    margin-bottom: 10px;
+    width: 1160px;
+    height: 750px;
+}
+.gallery3 img {
+    width: 100%
+}
