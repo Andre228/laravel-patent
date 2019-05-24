@@ -23,7 +23,7 @@
                                     /** @var \App\User $user*/
                                 @endphp
                                 @if($user->role == 'user')
-                                    <tr  >
+                                    <tr  @if( !$user->is_confirmed ) style="background-color: #ccc" @endif >
                                         <td> {{ $user->id }} </td>
                                         <td> {{ $user->name }} </td>
                                         <td>

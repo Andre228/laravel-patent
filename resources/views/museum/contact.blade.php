@@ -12,6 +12,7 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('css/templatemo-style.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 
 </head>
@@ -27,9 +28,41 @@
     <section id="contact">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-6 col-sm-12">
-                    <form id="contact-form" role="form" action="" method="POST">
+
+                    @php /** @var \Illuminate\Support\ViewErrorBag $errors*/ @endphp
+                    @if($errors->any())
+                        <div class="row justify-content-center notification-block">
+                            <div class="col-md-11">
+                                <div class="alert alert-danger" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    @foreach ($errors->all() as $error)
+                                        <div>{{ $error }}</div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(session('success'))
+                        <div class="row justify-content-center success-block">
+                            <div class="col-md-11">
+                                <div class="alert alert-success" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                    <div>{{ session()->get('success') }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+
+                    <form id="contact-form" role="form" action="{{ route('send.issue') }}" method="POST">
+                        @csrf
+
                         <div class="section-title">
                             <h2 style="float: left; font-family: Comfortaa,Didact Gothic;">{{$item->title}} <small style="float: left; font-size: 20.3px">{{$item->subtitle}}</small></h2>
                         </div>
@@ -114,8 +147,9 @@
                         </div>
                         <div>
                             <div class="form-group">
-                                <form action="#" method="get">
-                                    <input type="email" class="form-control" placeholder="Enter your email" name="email" id="email" required="">
+                                <form action="{{route('send.issue')}}" method="get">
+                                    @csrf
+                                    <input type="email" class="form-control" placeholder="Введите ваш email" name="email" id="email" required="">
                                     <input type="submit" class="form-control" name="submit" id="form-submit" value="Подписаться">
                                 </form>
                                 <span><sup>*</sup> Заполните для получения уведомлений.</span>
@@ -141,6 +175,12 @@
 @endsection
 
 <script>
+
+
+
+    $(document).ready(function () {
+        $('.success-block').fadeIn(2000).fadeOut(2000, function(){$(this).remove()});
+    });
 
 
 </script>

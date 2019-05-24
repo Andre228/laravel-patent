@@ -41,13 +41,15 @@ Route::get('/', function () {
         $aliasfiltred[] = $alias[$i][0];
     }
     return view('welcome', compact('aliasfiltred', 'listwelcomeposts'));
-})->middleware('auth');
+})->middleware(['auth','confirmed']);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::get('/contact', 'HomeController@contact')->name('contact')->middleware('auth');
-Route::put('/home/{id}', 'HomeController@update')->name('dashboard.edit')->middleware('auth');
+Route::get('/home', 'HomeController@index')->name('home')->middleware(['auth','confirmed']);
+Route::get('/contact', 'HomeController@contact')->name('contact')->middleware(['auth','confirmed']);
+Route::post('/contact-issue', 'Museum\UserContactController@userMessage')->name('send.issue')->middleware(['auth','confirmed']);
+Route::get('/contact-issue', 'Museum\UserContactController@subscribe')->name('send.issue')->middleware(['auth','confirmed']);
+Route::put('/home/{id}', 'HomeController@update')->name('dashboard.edit')->middleware(['auth','confirmed']);
 
 
 
@@ -71,24 +73,33 @@ Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
 
    Route::resource('posts', 'PostController')
        ->names('museum.posts')
-       ->middleware('auth');
+       ->middleware(['auth','confirmed']);
 
 
 });
 
 Route::get('posts/count', 'Museum\PostController@showWithCountPosts')
     ->name('museum.show.count')
-    ->middleware('auth');
+    ->middleware(['auth','confirmed']);
 
 Route::get('/about', 'HomeController@about')
-    ->name('museum.about');
+    ->name('museum.about')->middleware(['auth','confirmed']);
+
+Route::get('/users/{user}/request-confirmation', 'UsersEmailConfirmationController@request')
+    ->name('request.confirm.email')->middleware('auth');
+
+Route::post('/users/{user}/send-confirmation-email', 'UsersEmailConfirmationController@sendEmail')
+    ->name('send.confirmation.email')->middleware('auth');
+
+Route::get('/users/{user}/confirm-email/{token}', 'UsersEmailConfirmationController@confirm')
+    ->name('confirm.email');
 
 
 
 $groupData = [
     'namespace' => 'Museum\Admin',
     'prefix' => 'admin/museum',
-    'middleware' => ['admin']
+    'middleware' => ['admin', 'confirmed']
 ];
 
 Route::group($groupData, function () {
