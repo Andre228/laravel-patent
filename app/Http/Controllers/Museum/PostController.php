@@ -116,8 +116,24 @@ class PostController extends BaseController
     public function showWithCountPosts(Request $request)
     {
         $count = Request::input('countpaginate');
-        $paginator = $this->postRepository->getAllWithPaginateForUsers($count);
-        return view('museum.posts.index', compact('paginator'));
+        $search = Request::input('search');
 
+        if(!empty($search)) {
+            $paginator = $this->postRepository->getAllSearchWithPaginateForUsers($count, $search);
+            return view('museum.posts.index', compact('paginator'));
+        }
+
+        else {
+            $paginator = $this->postRepository->getAllWithPaginateForUsers($count);
+            return view('museum.posts.index', compact('paginator'));
+        }
+
+    }
+
+
+    public function showWithSortPosts()
+    {
+        $paginator = $this->postRepository->getAllWithGroupCategories();
+        return view('museum.posts.index', compact('paginator'));
     }
 }

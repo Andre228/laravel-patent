@@ -45,11 +45,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware(['auth','confirmed']);
-Route::get('/contact', 'HomeController@contact')->name('contact')->middleware(['auth','confirmed']);
-Route::post('/contact-issue', 'Museum\UserContactController@userMessage')->name('send.issue')->middleware(['auth','confirmed']);
-Route::get('/contact-issue', 'Museum\UserContactController@subscribe')->name('send.issue')->middleware(['auth','confirmed']);
-Route::put('/home/{id}', 'HomeController@update')->name('dashboard.edit')->middleware(['auth','confirmed']);
+Route::get('/home', 'HomeController@index')
+    ->name('home')->middleware(['auth','confirmed']);
+
+Route::get('/contact', 'HomeController@contact')
+    ->name('contact')->middleware(['auth','confirmed']);
+
+Route::post('/contact-issue', 'Museum\UserContactController@userMessage')
+    ->name('send.issue')->middleware(['auth','confirmed']);
+
+Route::get('/contact-issue', 'Museum\UserContactController@subscribe')
+    ->name('send.issue')->middleware(['auth','confirmed']);
+
+Route::put('/home/{id}', 'HomeController@update')
+    ->name('dashboard.edit')->middleware(['auth','confirmed']);
+
+
+
+
+
 
 
 
@@ -80,6 +94,10 @@ Route::group(['namespace' => 'Museum', 'prefix' => 'museum'], function () {
 
 Route::get('posts/count', 'Museum\PostController@showWithCountPosts')
     ->name('museum.show.count')
+    ->middleware(['auth','confirmed']);
+
+Route::get('posts/sort', 'Museum\PostController@showWithSortPosts')
+    ->name('museum.show.sort')
     ->middleware(['auth','confirmed']);
 
 Route::get('/about', 'HomeController@about')

@@ -9,6 +9,8 @@
 namespace App\Repositories;
 
 use App\Models\Post as Model;
+use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 
 class PostRepository extends CoreRepository
@@ -50,8 +52,9 @@ class PostRepository extends CoreRepository
     {
         $columns = [
             'id',
-            'title',
+            'title as posttitle',
             'slug',
+            'excerpt',
             'created_at',
             'is_published',
             'published_at',
@@ -123,6 +126,50 @@ class PostRepository extends CoreRepository
 
         return $result;
 
+    }
+
+
+
+    public function getAllSearchWithPaginateForUsers($count, $search)
+    {
+
+//        $results = $this->startConditions()
+//            ->where('title', 'LIKE', "%{$search}%")
+//            ->orWhere('excerpt', 'LIKE', "%{$search}%")
+//            ->paginate($count);
+
+
+      //  ->join('categories', 'posts.category_id', '=', 'categories.id')
+       // dd($count);
+
+
+        $results =  DB::table('posts')
+            ->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->select('posts.title as posttitle', 'posts.excerpt', 'categories.title as cattitle', 'posts.is_published', 'posts.created_at' ,'posts.id')
+            ->where('posts.title', 'LIKE', "%{$search}%")
+            ->orWhere('posts.excerpt', 'LIKE', "%{$search}%")
+            ->orWhere('categories.title', 'LIKE', "%{$search}%")
+            ->paginate($count);
+
+
+
+        return $results;
+
+    }
+
+
+    public function getAllWithGroupCategories()
+    {
+        $results =  DB::table('posts')
+            ->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->select('posts.title as posttitle', 'posts.excerpt',
+                'categories.title as cattitle', 'posts.is_published', 'posts.created_at' ,'posts.id')
+            ->groupBy('categories.id','posts.id')
+            ->paginate(31);
+
+
+        
+        return $results;
     }
 
 }

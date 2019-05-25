@@ -86,9 +86,9 @@
                         <div class="container">
                             <div class="hero-inner">
                                 <div class="hero-copy">
-                                    <h1 class="hero-title h2-mobile mt-0 is-revealing">Landing template for startups</h1>
+                                    <h1 class="hero-title h2-mobile mt-0 is-revealing">Приветствуем вас на нашем сайте</h1>
                                     <p class="hero-paragraph is-revealing">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
-                                    <p class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="#">Pricing and plans</a></p>
+                                    <p class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="{{route('museum.posts.index')}}">Перейти к экспонатам</a></p>
                                 </div>
                                 <div class="hero-illustration is-revealing">
                                     <svg width="528" height="413" viewBox="0 0 528 413" xmlns="http://www.w3.org/2000/svg">
