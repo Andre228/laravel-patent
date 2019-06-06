@@ -27,7 +27,7 @@
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron bg-dark text-white">
-                    <h1 class="text-white">Это статьи.</h1>
+                    <h1 class="text-white">Наши экспонаты.</h1>
                     <p class="text-white">Здесь представлены все статьи, вы можете зайти, почитать описание и посмотреть картинки.</p>
                     <p class="lead">
                         <a class="btn btn-dark btn-lg" style="color: #FC90A5" href="{{route('museum.about')}}" role="button">Узнать больше</a>

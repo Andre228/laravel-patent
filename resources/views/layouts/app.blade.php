@@ -36,7 +36,7 @@
         <ul class="nav ul-header">
 
             <li class="li-header">
-                <a class="link-header" href="{{ url('/') }}" title="Home">
+                <a class="link-header" href="{{ url('/') }}" title="Домой">
                   <span class="icon-stack">
                     <i class="fas fa-home"></i>
 
@@ -46,7 +46,7 @@
             </li>
 
             <li class="li-header">
-                <a class="link-header" href="{{ route('museum.about') }}" title="About">
+                <a class="link-header" href="{{ route('museum.about') }}" title="О нас">
                   <span class="icon-stack">
                     <i class="fas fa-book-open"></i>
 
@@ -56,7 +56,7 @@
             </li>
 
             <li class="li-header">
-                <a class="link-header" href="{{ url('/') }}" title="About">
+                <a class="link-header" href="{{ url('/') }}" title="Новости">
                   <span class="icon-stack">
                     <i class="fas fa-newspaper"></i>
 
@@ -66,7 +66,7 @@
             </li>
 
             <li class="li-header">
-                <a class="link-header" href="{{route('contact')}}" title="Contact">
+                <a class="link-header" href="{{route('contact')}}" title="Связь">
                   <span class="icon-stack">
                     <i class="fas fa-phone"></i>
                   </span>
@@ -77,7 +77,7 @@
 
             <li class="li-header">
                 @if(Auth::check())
-                    <a class="link-header" href="/museum/posts" title="Contact">
+                    <a class="link-header" href="/museum/posts" title="Экспонаты">
                       <span class="icon-stack">
                         <i class="fab fa-medium"></i>
                       </span>
@@ -146,6 +146,7 @@
                                             <a class="dropdown-item" href="{{route('museum.admin.users.index')}}"><i class="fas fa-users"></i> Пользователи</a>
                                             <a class="dropdown-item" href="{{route('museum.admin.contact.edit', 1)}}"><i class="fas fa-phone"></i> Связь</a>
                                             <a class="dropdown-item" href="{{route('museum.admin.partners.index')}}"><i class="fas fa-handshake"></i> Партнеры</a>
+                                            <a class="dropdown-item" href="{{route('museum.admin.about.edit', 1)}}"><i class="fas fa-book-open"></i> О нас</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}

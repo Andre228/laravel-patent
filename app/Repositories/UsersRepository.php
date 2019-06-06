@@ -33,6 +33,7 @@ class UsersRepository extends CoreRepository
             'role',
             'created_at',
             'updated_at',
+            'is_confirmed'
         ];
 
         $result = $this->startConditions()

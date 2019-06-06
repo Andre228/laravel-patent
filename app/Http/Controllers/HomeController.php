@@ -78,13 +78,9 @@ class HomeController extends Controller
 
     public function about()
     {
+        $abouts = DB::table('about')->find(1);
 
-        $item = $this->contactRepository->getAllFields();
-
-        $partners = DB::table('partners')->select('name','link')->get();
-
-        return view('museum.about', compact('item','partners'));
-
+        return view('museum.about', compact('abouts'));
     }
 
 

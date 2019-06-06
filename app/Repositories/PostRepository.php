@@ -168,7 +168,7 @@ class PostRepository extends CoreRepository
             ->paginate(31);
 
 
-        
+
         return $results;
     }
 

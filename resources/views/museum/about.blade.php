@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Museum/About/about.css')}}">
+
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{asset('css/templatemo-style.css')}}">
@@ -24,86 +26,73 @@
 @extends('layouts.app')
 
 @section('content')
-    <body>
-         <h1>Мы открылись</h1>
+    <body class="backgrnd">
 
+         <div class="container">
+             <div class="col-md-10 col-md-offset-1">
+                 <div class="col-sm-12 col-sm-offset-1 about-card" >
+                     <h1>{{ $abouts->bigtitle }}</h1>
+                     <div class="media">
+                         <div class="media-body">
+                             <h5 class="mt-0 mb-1">{{ $abouts->title1 }}</h5>
+                             <p>{{ $abouts->description1 }}</p>
+                         </div>
 
+                     </div>
+                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-xl">Бабочка Морфо</button>
 
-
-
-
-         <footer id="footer" class="contact-footer">
-             <div class="container">
-                 <div class="row">
-
-                     <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                             <div class="section-title">
-                                 <h2>Наши соц. сети</h2>
-                             </div>
-                             <address>
-                                 <p>Вместе с 2019 года,<br> подписывайтесь на нас</p>
-                             </address>
-
-                             <ul class="social-icon">
-                                 <li style="margin-left: 7px"><a class="a-contact" href="{{$item->facebook}}" ><i class="fab fa-facebook-f fa-2x"></i></a></li>
-                                 <li style="margin-left: 7px"><a class="a-contact" href="{{$item->twitter}}" ><i class="fab fa-twitter fa-2x"></i></a></li>
-                                 <li style="margin-left: 7px"><a class="a-contact" href="{{$item->instagram}}" ><i class="fab fa-instagram fa-2x"></i></a></li>
-                             </ul>
-
-                             <div class="copyright-text">
-                                 <p>Copyright &copy; 2019 SSAU</p>
+                     <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                         <div class="modal-dialog modal-xl">
+                             <div class="modal-content">
+                                 <img src="images/Mofro.jpg" >
                              </div>
                          </div>
                      </div>
 
-                     <div class="col-md-4 col-sm-6">
-                         <div class="footer-info">
-                             <div class="section-title">
-                                 <h2>Контактная информация</h2>
-                             </div>
-                             <address>
-                                 <p>{{$item->phone1}}, {{$item->phone2}}</p>
-                                 <p><a class="a-contact" href="mailto:youremail.co">{{$item->email}}</a></p>
-                             </address>
+                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-x2">Волнянка ивовая</button>
 
-                             <div class="footer_menu">
-                                 <h2>Наши партнеры</h2>
-                                 <ul>
-                                     @foreach($partners as $partner)
-                                         <li><a class="a-contact" href="{{$partner->link}}">{{ $partner->name }}</a></li>
-                                     @endforeach
-                                 </ul>
+                     <div class="modal fade bd-example-modal-x2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                         <div class="modal-dialog modal-xl">
+                             <div class="modal-content">
+                                 <img src="images/Volnyanka.jpg" >
                              </div>
                          </div>
                      </div>
 
-                     <div class="col-md-4 col-sm-12">
-                         <div class="footer-info newsletter-form">
-                             <div class="section-title">
-                                 <h2>Newsletter Signup</h2>
-                             </div>
-                             <div>
-                                 <div class="form-group">
-                                     <form action="{{route('send.issue')}}" method="get">
-                                         @csrf
-                                         <input type="email" class="form-control" placeholder="Введите ваш email" name="email" id="email" required="">
-                                         <input type="submit" class="form-control" name="submit" id="form-submit" value="Подписаться">
-                                     </form>
-                                     <span><sup>*</sup> Заполните для получения уведомлений.</span>
-                                 </div>
+                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target=".bd-example-modal-x3">Пестрянка</button>
+
+                     <div class="modal fade bd-example-modal-x3" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                         <div class="modal-dialog modal-xl">
+                             <div class="modal-content">
+                                 <img src="images/Pestryanka.jpg" >
                              </div>
                          </div>
                      </div>
+                     <hr>
+                     <br>
+
+                     <h5 class="mt-0 mb-1">{{ $abouts->title2 }}</h5>
+                     <p>{{ $abouts->description2 }}</p>
+                     <ul>
+                         <li> {{ $abouts->feature1 }}</li>
+                         <li> {{ $abouts->feature2 }}</li>
+                         <li> {{ $abouts->feature3 }}</li>
+                     </ul>
+                     <br>
+
+                     <p>{{ $abouts->description3 }}</p>
+
+                     @if( Auth::user()->role === 'admin')
+                         <small class="text-muted">Так как вы администратор, вы можете прямо сейчас отредактировать запись
+                             <a href="{{ route('museum.admin.about.edit',1 ) }}">Править</a>
+                         </small>
+                     @endif
 
                  </div>
              </div>
-         </footer>
+         </div>
 
 
-
-
-         <script src="{{asset('js/smoothscroll.js')}}"></script>
     </body>
 </html>
 

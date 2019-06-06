@@ -143,7 +143,7 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="footer-info newsletter-form">
                         <div class="section-title">
-                            <h2>Newsletter Signup</h2>
+                            <h2>Подписаться на новости</h2>
                         </div>
                         <div>
                             <div class="form-group">

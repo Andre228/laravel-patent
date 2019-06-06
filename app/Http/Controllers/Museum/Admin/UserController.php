@@ -28,7 +28,10 @@ class UserController extends BaseController
     public function index()
     {
         $users = $this->userRepository->getAllWithPaginate();
-        return view('museum.admin.user.index', compact('users'));
+        if($users) {
+            return view('museum.admin.user.index', compact('users'));
+        }
+        else abort(404);
     }
 
     /**

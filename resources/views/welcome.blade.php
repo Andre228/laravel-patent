@@ -87,7 +87,7 @@
                             <div class="hero-inner">
                                 <div class="hero-copy">
                                     <h1 class="hero-title h2-mobile mt-0 is-revealing">Приветствуем вас на нашем сайте</h1>
-                                    <p class="hero-paragraph is-revealing">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
+                                    <p class="hero-paragraph is-revealing">Информация представленная на нашем сайте является собственностью нашего музея и не несёт целью обмана вас и третьих лиц</p>
                                     <p class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="{{route('museum.posts.index')}}">Перейти к экспонатам</a></p>
                                 </div>
                                 <div class="hero-illustration is-revealing">
@@ -163,31 +163,36 @@
                                 <div class="features-wrap">
 
                                     @for($i = 0; $i < count($listwelcomeposts); $i++)
-                                    <div class="feature is-revealing">
-                                        <div class="feature-inner">
-                                            <div class="feature-icon">
-                                                <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
-                                                    <defs>
-                                                        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="feature-2-a">
-                                                            <stop stop-color="#007CFE" stop-opacity="0" offset="0%"/>
-                                                            <stop stop-color="#007DFF" offset="100%"/>
-                                                        </linearGradient>
-                                                        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="feature-2-b">
-                                                            <stop stop-color="#FF4F7A" stop-opacity="0" offset="0%"/>
-                                                            <stop stop-color="#FF4F7A" offset="100%"/>
-                                                        </linearGradient>
-                                                    </defs>
-                                                    <g fill="none" fill-rule="evenodd">
-                                                        <path d="M0 0h32v7c0 13.807-11.193 25-25 25H0V0z" fill="url(#feature-2-a)"/>
-                                                        <path d="M48 16v7c0 13.807-11.193 25-25 25h-7c0-17.673 14.327-32 32-32z" fill="url(#feature-2-b)" transform="matrix(1 0 0 -1 0 64)"/>
-                                                    </g>
-                                                </svg>
 
-                                            </div>
-                                            <h4 class="feature-title h3-mobile">{{$listwelcomeposts[$i]['title']}}</h4>
-                                            <p class="text-sm">{{$listwelcomeposts[$i]['excerpt']}}</p>
+                                        <div class="feature is-revealing">
+                                            <a href="{{ route('museum.posts.show', $listwelcomeposts[$i]['id']) }}" style="text-decoration: none; color: #8c8c8c">
+                                                <div class="feature-inner">
+                                                    <div class="feature-icon">
+                                                        <svg width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+                                                            <defs>
+                                                                <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="feature-2-a">
+                                                                    <stop stop-color="#007CFE" stop-opacity="0" offset="0%"/>
+                                                                    <stop stop-color="#007DFF" offset="100%"/>
+                                                                </linearGradient>
+                                                                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="feature-2-b">
+                                                                    <stop stop-color="#FF4F7A" stop-opacity="0" offset="0%"/>
+                                                                    <stop stop-color="#FF4F7A" offset="100%"/>
+                                                                </linearGradient>
+                                                            </defs>
+                                                            <g fill="none" fill-rule="evenodd">
+                                                                <path d="M0 0h32v7c0 13.807-11.193 25-25 25H0V0z" fill="url(#feature-2-a)"/>
+                                                                <path d="M48 16v7c0 13.807-11.193 25-25 25h-7c0-17.673 14.327-32 32-32z" fill="url(#feature-2-b)" transform="matrix(1 0 0 -1 0 64)"/>
+                                                            </g>
+                                                        </svg>
+
+                                                    </div>
+                                                    <h4 class="feature-title h3-mobile">{{$listwelcomeposts[$i]['title']}}</h4>
+                                                    <p class="text-sm">{{$listwelcomeposts[$i]['excerpt']}}</p>
+                                                </div>
+                                                <small style="float: left">{{$listwelcomeposts[$i]['published_at']}}</small>
+                                            </a>
                                         </div>
-                                    </div>
+
                                     @endfor
 
 

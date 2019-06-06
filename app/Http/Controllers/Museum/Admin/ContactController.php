@@ -24,10 +24,6 @@ class ContactController extends BaseController
     {
         $item = $this->contactRepository->getAllFields();
 
-       // $partners = $this->contactRepository->getAllPartners();
-       // dd($partners[0]->name);
-
-
         return view('museum.admin.contact.edit', compact('item'));
     }
 
@@ -35,8 +31,6 @@ class ContactController extends BaseController
     public function update(Request $request, $id)
     {
         $item = $this->contactRepository->getEdit(1);
-
-
 
         $data = $request->all();
 
