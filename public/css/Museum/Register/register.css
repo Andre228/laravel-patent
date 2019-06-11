@@ -1,0 +1,43 @@
+
+.backgrnd {
+    background: -webkit-linear-gradient(45deg, #FC5C7D, #6A82FB);
+    background-size: 300% 300% ;
+    animation: gradient 10s ease infinite ;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 20% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 10% 65%;
+    }
+}
+
+
+
+
+
+
+.deftext {
+    background: #0B2349;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.gradient-text {
+
+    font-weight:  bold;
+    background: linear-gradient(45deg, #FC5C7D, #6A82FB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #0B2349;
+
+
+}

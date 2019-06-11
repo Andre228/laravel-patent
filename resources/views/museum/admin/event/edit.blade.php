@@ -14,33 +14,33 @@
 @section('content')
     @php /** @var \App\Models\Post $item*/ @endphp
     <div class="container">
-        @include('museum.admin.post.includes.result_messages')
+        @include('museum.admin.event.includes.result_messages')
 
-        <form method="POST" action="{{route('museum.admin.posts.update', $item->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('museum.admin.event.update', $item->id)}}" enctype="multipart/form-data">
             @method('PATCH')
             @csrf
             <div class="row justify-content-center">
 
                 <div class="col-md-8">
-                    @include('museum.admin.post.includes.edit.post_edit_main_col')
+                    @include('museum.admin.event.includes.event_edit_main_col')
                 </div>
 
                 <div class="col-md-3">
-                    @include('museum.admin.post.includes.edit.post_edit_add_col')
+                    @include('museum.admin.event.includes.event_edit_add_col')
                 </div>
 
             </div>
         </form>
 
-        <div class=" image-content">
-            @include('museum.admin.post.includes.carousel_with_images')
-        </div>
+        {{--<div class=" image-content">--}}
+            {{--@include('museum.admin.post.includes.carousel_with_images')--}}
+        {{--</div>--}}
 
 
 
         @if($item->exists)
             <br>
-            <form method="POST" action="{{ route('museum.admin.posts.destroy', $item->id) }}">
+            <form method="POST" action="{{ route('museum.admin.event.destroy', $item->id) }}">
                 @method('DELETE')
                 @csrf
                 <div class="row justify-content-center">

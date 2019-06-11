@@ -12,7 +12,7 @@
                     Черновик
                 @endif
             </div>
-            <div class="card-body admin-card-field admin-table-text">
+            <div class="card-body admin-theme admin-card-field admin-table-text">
                 <div class="card-title"></div>
                 <div class="card-subtitle mb-2 text-muted"></div>
                 <ul class="nav nav-tabs" role="tablist">
@@ -29,18 +29,18 @@
                         <div class="form-group">
                             <label for="title">Заголовок</label>
                             <input name="title" id="title" type="text" value="{{old('title',$item->title)}}"
-                                   class="form-control admin-field admin-table-text" minlength="3" required/>
+                                   class="form-control admin-theme admin-field admin-table-text" minlength="3" required/>
                         </div>
                         <div class="form-group">
                             <label for="content_raw">Статья</label>
                             <textarea name="content_raw" id="content_raw"
-                                      class="form-control admin-field admin-table-text" rows="20">{{old('content_raw', $item->content_raw)}}</textarea>
+                                      class="form-control admin-theme admin-field admin-table-text" rows="20">{{old('content_raw', $item->content_raw)}}</textarea>
                         </div>
                     </div>
                     <div class="tab-pane" id="adddata" role="tabpanel">
                         <div class="form-group">
                             <label for="category_id">Категория</label>
-                            <select name="category_id" id="category_id" class="form-control admin-field admin-table-text" placeholder="Выберете категорию" required>
+                            <select name="category_id" id="category_id" class="form-control admin-theme admin-field admin-table-text" placeholder="Выберете категорию" required>
                                 @foreach($categoryList as $categoryOption)
                                     <option value="{{ $categoryOption->id }}" @if($categoryOption->id == $item->category_id) selected @endif>
                                         {{$categoryOption->id_title}}
@@ -51,13 +51,13 @@
                         <div class="form-group">
                             <label for="slug">Индетификатор</label>
                             <input name="slug" id="slug" value="{{$item->slug}}" type="text"
-                                      class="form-control admin-field admin-table-text">
+                                      class="form-control admin-theme admin-field admin-table-text">
                         </div>
 
                         <div class="form-group">
                             <label for="excerpt">Выдержка</label>
                             <textarea name="excerpt" id="excerpt"
-                                      class="form-control admin-field admin-table-text">{{old('excerpt', $item->excerpt)}}</textarea>
+                                      class="form-control admin-theme admin-field admin-table-text">{{old('excerpt', $item->excerpt)}}</textarea>
                         </div>
 
                         <div class="form-check">
@@ -73,3 +73,35 @@
         </div>
     </div>
 </div>
+
+
+<script>
+
+    var checkbox = $("#checkbox");
+
+    $(document).ready(function(){
+        checkbox =  !$("#checkbox").prop('checked', true);
+        setCheckbox();
+    });
+
+    function changeText() {
+        setCheckbox();
+    }
+
+    function setCheckbox() {
+        if(checkbox) {
+            $('.admin-theme').addClass('admin-card-field');
+            $('.admin-theme').addClass('admin-table-text');
+            $('.admin-theme').addClass('admin-field');
+
+        }
+        else {
+            $('.admin-theme').removeClass('admin-card-field');
+            $('.admin-theme').removeClass('admin-table-text');
+            $('.admin-theme').removeClass('admin-field');
+        }
+        checkbox = !checkbox;
+    }
+
+
+</script>

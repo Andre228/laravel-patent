@@ -157,6 +157,10 @@ Route::group($groupData, function () {
     Route::resource('about', 'AboutController')
         ->except(['show', 'destroy', 'create', 'store'])
         ->names('museum.admin.about');
+
+    //Events
+    Route::resource('event', 'EventController')
+        ->names('museum.admin.event');
 });
 
 
