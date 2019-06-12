@@ -12,11 +12,11 @@
 
 @section('content')
     <div class="container">
-        @include('museum.admin.event.includes.result_messages')
+        @include('museum.admin.tour.includes.result_messages')
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <a class="btn btn-dark" href="{{route('museum.admin.event.create')}}">Добавить</a>
+                    <a class="btn btn-dark" href="{{route('museum.admin.tour.create')}}">Добавить</a>
                     <input  id="checkbox" type="checkbox"  onchange="changeText()">
                     <label class="deftext" style="margin-right: 850px; margin-top: 7px">Изменить тему</label>
                 </nav>
@@ -37,19 +37,19 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td class= "admin-table-text">
-                                        <a class="link-title" href="{{route('museum.admin.event.edit',$item->id)}}">
+                                        <a class="link-title" href="{{route('museum.admin.tour.edit',$item->id)}}">
                                             {{$item->title}}
                                         </a>
                                     </td>
-                                    <td @if(( \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') > \Carbon\Carbon::now()->format('Y-m-d') && $item->end_date == null) || \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') < \Carbon\Carbon::now()->format('Y-m-d')  ) style="color:#ccc" @endif>
+                                    <td @if(( \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') > \Carbon\Carbon::now()->format('Y-m-d')) || \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') < \Carbon\Carbon::now()->format('Y-m-d')  ) style="color:#ccc" @endif>
                                         {{ $item->start_date ? \Carbon\Carbon::parse($item->start_date)->format('d.M.Y H:i'):'' }}
                                     </td>
 
-                                    @if( $item->end_date != null )
-                                        <td @if(\Carbon\Carbon::parse($item->end_date)->format('Y-m-d') < \Carbon\Carbon::now()->format('Y-m-d') ) style="color:#ccc"   @endif>
+
+                                        <td @if(( \Carbon\Carbon::parse($item->start_date)->format('Y-m-d') > \Carbon\Carbon::now()->format('Y-m-d')) || \Carbon\Carbon::parse($item->end_date)->format('Y-m-d') < \Carbon\Carbon::now()->format('Y-m-d')  ) style="color:#ccc"   @endif>
                                             {{ $item->end_date ? \Carbon\Carbon::parse($item->end_date)->format('d.M.Y H:i'):'-' }}
                                         </td>
-                                    @endif
+
                                 </tr>
                             @endforeach
                             </tbody>

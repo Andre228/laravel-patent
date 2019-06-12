@@ -160,7 +160,14 @@ Route::group($groupData, function () {
 
     //Events
     Route::resource('event', 'EventController')
+        ->except(['show'])
         ->names('museum.admin.event');
+
+    //Tours
+    Route::resource('tour', 'TourController')
+        ->except(['show'])
+        ->names('museum.admin.tour');
+
 });
 
 

@@ -7,7 +7,7 @@
             <div class="card-body admin-theme admin-field admin-table-text">
                 <div class="row">
                     <button id="saveBtn" type="submit" class="btn btn-dark" style="margin-left: 10px">Сохранить</button>
-                    <a href="{{route('museum.admin.event.index')}}" class="btn btn-dark" style="margin-left: 20px">События</a>
+                    <a href="{{route('museum.admin.tour.index')}}" class="btn btn-dark" style="margin-left: 20px">Экскурсии</a>
                 </div>
             </div>
         </div>
@@ -20,10 +20,6 @@
                 <div class="card-body admin-theme admin-field admin-table-text">
                     <ul class="list-unstyled">
                         <li>ID: {{ $item->id }}</li>
-                        {{--<li>--}}
-                            {{--<a class="btn btn-dark" data-toggle="collapse" href="#multiCollapseExample1"--}}
-                               {{--role="button" aria-expanded="false" aria-controls="multiCollapseExample1" style="margin-top: 10px">Показать изображения</a>--}}
-                        {{--</li>--}}
                         <li>
                             <input  id="checkbox" type="checkbox" style="margin-top: 5px" onchange="changeText()">
                             <label class="deftext">Изменить тему</label>

@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\Museum\Admin;
 
-use App\Models\Event;
+use App\Models\Tour;
+use App\Repositories\TourRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\EventRepository;
 use Illuminate\Support\Carbon;
 
-class EventController extends BaseController
+class TourController extends BaseController
 {
 
-
-
-    private $eventRepository;
+    private $tourRepository;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->eventRepository = app(EventRepository::class);
+        $this->tourRepository = app(TourRepository::class);
 
     }
 
@@ -30,9 +28,9 @@ class EventController extends BaseController
      */
     public function index()
     {
-        $paginator = $this->eventRepository->getAllWithPaginate();
+        $paginator = $this->tourRepository->getAllWithPaginate();
 
-        return view('museum.admin.event.index', compact('paginator'));
+        return view('museum.admin.tour.index', compact('paginator'));
     }
 
     /**
@@ -42,9 +40,8 @@ class EventController extends BaseController
      */
     public function create()
     {
-        $item = new Event();
-        return view('museum.admin.event.create', compact('item'));
-
+        $item = new Tour();
+        return view('museum.admin.tour.create', compact('item'));
     }
 
     /**
@@ -56,10 +53,10 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $data = $request->input();
-        $item = (new Event())->create($data);
+        $item = (new Tour())->create($data);
 
         if($item) {
-            return redirect()->route('museum.admin.event.edit', $item->id)->with(['success' => 'Успешно сохранено']);
+            return redirect()->route('museum.admin.tour.edit', $item->id)->with(['success' => 'Успешно сохранено']);
         }
         else {
             return back()->withErrors(['msg' => 'Ошибка сохранения'])->withInput();
@@ -74,7 +71,7 @@ class EventController extends BaseController
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -85,12 +82,10 @@ class EventController extends BaseController
      */
     public function edit($id)
     {
-        $item = $this->eventRepository->getEdit($id);
-
-        //$start_date = $item->start_date;
+        $item = $this->tourRepository->getEdit($id);
 
 
-        return view('museum.admin.event.edit', compact('item'));
+        return view('museum.admin.tour.edit', compact('item'));
     }
 
     /**
@@ -102,7 +97,7 @@ class EventController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $item = $this->eventRepository->getEdit($id);
+        $item = $this->tourRepository->getEdit($id);
 
 
         if(empty($item)) {
@@ -118,20 +113,18 @@ class EventController extends BaseController
         $start_date = Carbon::parse($data['start_date'])->format('Y-m-d H:i:s');
         $data['start_date'] = $start_date;
 
-        if(!empty($data['end_date'])) {
-            $end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
-            $data['end_date'] = $end_date;
-        }
-        else {
-            $data['end_date'] = null;
+        if(empty($data['end_date'])) {
+            $data['end_date'] = Carbon::now()->format('Y-m-d H:i:s');
         }
 
+        $end_date = Carbon::parse($data['end_date'])->format('Y-m-d H:i:s');
+        $data['end_date'] = $end_date;
 
         $result = $item->update($data);
 
         if($result) {
             return redirect()
-                ->route('museum.admin.event.edit',$item->id)
+                ->route('museum.admin.tour.edit',$item->id)
                 ->with(['success' => 'Успешно сохранено']);
         }
         else {
@@ -149,13 +142,13 @@ class EventController extends BaseController
      */
     public function destroy($id)
     {
-        $del = $this->eventRepository->getEdit($id);
+        $del = $this->tourRepository->getEdit($id);
         $del->delete();
 
 
         if($del) {
             return redirect()
-                ->route('museum.admin.event.index')
+                ->route('museum.admin.tour.index')
                 ->with(['success' => 'Успешно удалено']);
         }
     }

@@ -19,11 +19,11 @@
         <div class="card">
             <div class="card-header">
                 @if(\Carbon\Carbon::parse($item->start_date)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d'))
-                    Текущее
-                @elseif((\Carbon\Carbon::parse($item->start_date) > \Carbon\Carbon::now() && $item->end_date == null) || \Carbon\Carbon::parse($item->end_date) < \Carbon\Carbon::now())
-                    Прошедшее, ожидаемое
+                    Текущая
+                @elseif((\Carbon\Carbon::parse($item->start_date) > \Carbon\Carbon::now()) || \Carbon\Carbon::parse($item->end_date) < \Carbon\Carbon::now())
+                    Прошедшая, ожидаемая
                 @else
-                    Текущее
+                    Текущая
                 @endif
             </div>
             <div class="card-body admin-theme admin-card-field admin-table-text">
@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link active admin-table-text" data-toggle="tab" href="#maindata" role="tab">Основные данные</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link admin-table-text" data-toggle="tab" href="#adddata" role="tab">Доп. данные</a>
+                    </li>
                 </ul>
                 <br>
                 <div class="tab-content">
@@ -40,41 +43,59 @@
                         <div class="form-group">
                             <label for="title">Заголовок</label>
                             <input name="title" id="title" type="text" value="{{old('title',$item->title)}}"
-                                   class="form-control admin-theme admin-field admin-table-text" minlength="3" required/>
+                                   class="form-control admin-theme admin-field admin-table-text" minlength="3" maxlength="254" required/>
                         </div>
+
                         <div class="form-group">
                             <label for="description">Описание</label>
                             <textarea name="description" id="description" required minlength="10"
                                       class="form-control admin-theme admin-field admin-table-text" rows="20">{{old('description', $item->description)}}</textarea>
                         </div>
-                    </div>
 
 
-                    <div id="errorMessage" hidden class="row justify-content-center notification-block">
-                        <div class="col-md-11">
-                            <div class="alert alert-danger" role="alert">
+                        <div id="errorMessage" hidden class="row justify-content-center notification-block">
+                            <div class="col-md-11">
+                                <div class="alert alert-danger" role="alert">
                                     <div>Дата начала не может быть больше даты конца</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
 
-                    <div class="form-group">
-                        <label for="start_date">Дата начала</label>
-                        <input required onchange="checkDate()" class="form-control admin-theme admin-field admin-table-text" name="start_date" id="start_date"
-                               type="text" value="{{old('start_date', $item->start_date)}}">
-                    </div>
+                        <div class="form-group">
+                            <label for="start_date">Дата начала</label>
+                            <input required onchange="checkDate()" class="form-control admin-theme admin-field admin-table-text" name="start_date" id="start_date"
+                                   type="text" value="{{old('start_date', $item->start_date)}}">
+                        </div>
 
 
                         <div class="form-group">
                             <label for="end_date">Дата окончания</label>
-                            <input onchange="setEndDate()" type="checkbox" id="notEmptyEndDate">
-                            <input disabled onchange="checkDate()" name="end_date" id="end_date" type="text"
-                                      class="form-control admin-theme admin-field admin-table-text" value="{{old('end_date', $item->end_date)}}">
+                            <input required onchange="checkDate()" name="end_date" id="end_date" type="text"
+                                   class="form-control admin-theme admin-field admin-table-text" value="{{old('end_date', $item->end_date)}}">
                         </div>
 
+                    </div>
 
+
+
+
+                    <div class="tab-pane" id="adddata" role="tabpanel">
+
+                        <div class="form-group">
+                            <label for="topic">Тема экскурсии</label>
+                            <input name="topic" id="topic" value="{{old('topic', $item->topic)}}" type="text"
+                                   class="form-control admin-theme admin-field admin-table-text" minlength="3" maxlength="254" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cost">Стоимость руб.</label>
+                            <input name="cost" id="cost" value="{{old('cost', $item->cost)}}"
+                                      class="form-control admin-theme admin-field admin-table-text" minlength="1" maxlength="254" required>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,13 +110,11 @@
 
 <script type="text/javascript">
 
-
-    var notEmptyEndDate = $('#notEmptyEndDate');
     var checkbox = $("#checkbox");
 
 
     function checkDate(){
-        if(( $('#start_date').val() > $('#end_date').val() ) && notEmptyEndDate ) {
+        if(( $('#start_date').val() > $('#end_date').val() ) ) {
             document.getElementById("errorMessage").removeAttribute("hidden");
             $('#saveBtn').prop('disabled', true);
         }
@@ -128,27 +147,11 @@
             language: 'ru'
         });
 
-        notEmptyEndDate =  $("#notEmptyEndDate").prop('checked', false);
-        $('#end_date').prop('disabled', false);
         checkbox =  !$("#checkbox").prop('checked', true);
         setCheckbox();
     });
 
 
-    function setEndDate() {
-        if(notEmptyEndDate) {
-            $('#end_date').value = null;
-            console.log($('#end_date').value);
-
-            $('#end_date').prop('disabled', true);
-                document.getElementById("errorMessage").setAttribute("hidden", "");
-                $('#saveBtn').prop('disabled', false);
-        }
-        else {
-            $('.admin-theme').prop('disabled', false);
-        }
-        notEmptyEndDate = !notEmptyEndDate;
-    }
 
     function changeText() {
         setCheckbox();

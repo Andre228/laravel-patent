@@ -18,13 +18,6 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                @if(\Carbon\Carbon::parse($item->start_date)->format('Y-m-d') == \Carbon\Carbon::now()->format('Y-m-d'))
-                    Текущее
-                @elseif((\Carbon\Carbon::parse($item->start_date) > \Carbon\Carbon::now() && $item->end_date == null) || \Carbon\Carbon::parse($item->end_date) < \Carbon\Carbon::now())
-                    Прошедшее, ожидаемое
-                @else
-                    Текущее
-                @endif
             </div>
             <div class="card-body admin-theme admin-card-field admin-table-text">
                 <div class="card-title"></div>
@@ -53,7 +46,7 @@
                     <div id="errorMessage" hidden class="row justify-content-center notification-block">
                         <div class="col-md-11">
                             <div class="alert alert-danger" role="alert">
-                                    <div>Дата начала не может быть больше даты конца</div>
+                                <div>Дата начала не может быть больше даты конца</div>
                             </div>
                         </div>
                     </div>
@@ -67,12 +60,12 @@
                     </div>
 
 
-                        <div class="form-group">
-                            <label for="end_date">Дата окончания</label>
-                            <input onchange="setEndDate()" type="checkbox" id="notEmptyEndDate">
-                            <input disabled onchange="checkDate()" name="end_date" id="end_date" type="text"
-                                      class="form-control admin-theme admin-field admin-table-text" value="{{old('end_date', $item->end_date)}}">
-                        </div>
+                    <div class="form-group">
+                        <label for="end_date">Дата окончания</label>
+                        <input onchange="setEndDate()" type="checkbox" id="notEmptyEndDate">
+                        <input disabled onchange="checkDate()" name="end_date" id="end_date" type="text"
+                               class="form-control admin-theme admin-field admin-table-text" value="{{old('end_date', $item->end_date)}}">
+                    </div>
 
 
                 </div>
@@ -141,8 +134,8 @@
             console.log($('#end_date').value);
 
             $('#end_date').prop('disabled', true);
-                document.getElementById("errorMessage").setAttribute("hidden", "");
-                $('#saveBtn').prop('disabled', false);
+            document.getElementById("errorMessage").setAttribute("hidden", "");
+            $('#saveBtn').prop('disabled', false);
         }
         else {
             $('.admin-theme').prop('disabled', false);

@@ -148,6 +148,7 @@
                                             <a class="dropdown-item" href="{{route('museum.admin.partners.index')}}"><i class="fas fa-handshake"></i> Партнеры</a>
                                             <a class="dropdown-item" href="{{route('museum.admin.about.edit', 1)}}"><i class="fas fa-book-open"></i> О нас</a>
                                             <a class="dropdown-item" href="{{route('museum.admin.event.index')}}"><i class="fas fa-bullhorn"></i> События</a>
+                                            <a class="dropdown-item" href="{{route('museum.admin.tour.index')}}"><i class="fas fa-atlas"></i> Экскурсии</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('home') }}">
                                             <i class="fas fa-address-card fa-1x"></i> {{ __('Профиль') }}
