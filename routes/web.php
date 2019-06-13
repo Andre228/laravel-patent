@@ -14,6 +14,7 @@
 use App\Models\Image;
 use App\Repositories\PostRepository;
 use App\Http\Controllers\Museum\PostController;
+use App\Repositories\TourRepository;
 
 Route::get('/', function () {
 
@@ -40,7 +41,11 @@ Route::get('/', function () {
         if(!empty($alias[$i][0]))
         $aliasfiltred[] = $alias[$i][0];
     }
-    return view('welcome', compact('aliasfiltred', 'listwelcomeposts'));
+
+    $tourRepository = app(TourRepository::class);
+    $tours = $tourRepository->getNewTours();
+
+    return view('welcome', compact('aliasfiltred', 'listwelcomeposts', 'tours'));
 })->middleware(['auth','confirmed']);
 
 Auth::routes();
@@ -99,6 +104,26 @@ Route::get('posts/count', 'Museum\PostController@showWithCountPosts')
 Route::get('posts/sort', 'Museum\PostController@showWithSortPosts')
     ->name('museum.show.sort')
     ->middleware(['auth','confirmed']);
+
+Route::get('/tours', 'Museum\TourController@index')
+    ->name('museum.tours')
+    ->middleware(['auth','confirmed']);
+
+Route::get('/tour/{id}/show', 'Museum\TourController@show')
+    ->name('museum.tours.show')
+    ->middleware(['auth','confirmed']);
+
+Route::get('/tours/count', 'Museum\TourController@showWithCountTours')
+    ->name('museum.tours.count')->middleware(['auth','confirmed']);
+
+Route::get('/tours/old', 'Museum\TourController@showOldTours')
+    ->name('museum.tours.old')->middleware(['auth','confirmed']);
+
+Route::get('/tours/current', 'Museum\TourController@showCurrentTours')
+    ->name('museum.tours.current')->middleware(['auth','confirmed']);
+
+Route::get('/tours/future', 'Museum\TourController@showFuturetTours')
+    ->name('museum.tours.future')->middleware(['auth','confirmed']);
 
 Route::get('/about', 'HomeController@about')
     ->name('museum.about')->middleware(['auth','confirmed']);

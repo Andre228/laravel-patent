@@ -9,6 +9,8 @@
 namespace App\Repositories;
 
 use App\Models\Tour as Model;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 
 class TourRepository extends CoreRepository
@@ -18,7 +20,6 @@ class TourRepository extends CoreRepository
     {
         return Model::class;
     }
-
 
 
     public function getAllWithPaginate()
@@ -36,7 +37,7 @@ class TourRepository extends CoreRepository
         $result = $this->startConditions()
             ->select($columns)
             ->orderBy('id','DESC')
-            ->paginate(25);
+            ->paginate(31);
 
         return $result;
     }
@@ -47,7 +48,137 @@ class TourRepository extends CoreRepository
         return $this->startConditions()->find($id);
     }
 
+    public function getNewTours()
+    {
+        $columns = [
+            'id',
+            'title',
+            'description',
+            'topic',
+            'start_date',
+            'end_date',
+            'cost',
+        ];
 
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('start_date' ,'>', Carbon::now()->format('Y-m-d'))
+            ->orderBy('id','DESC')
+            ->limit(3)
+            ->get()
+            ->toArray();
+
+        return $result;
+    }
+
+
+    public function getAllSearchWithPaginateForUsers($search, $count)
+    {
+
+
+        $results =  DB::table('tours')
+            ->select('title', 'description', 'topic', 'start_date', 'end_date')
+            ->where('title', 'LIKE', "%{$search}%")
+            ->orWhere('description', 'LIKE', "%{$search}%")
+            ->orWhere('topic', 'LIKE', "%{$search}%")
+            ->paginate($count);
+
+
+
+
+        return $results;
+    }
+
+    public function getAllWithPaginateForUsers($perPage)
+    {
+
+        $columns = [
+            'id',
+            'title',
+            'description',
+            'topic',
+            'start_date',
+            'end_date',
+            'cost',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->orderBy('id','DESC')
+            ->paginate($perPage);
+
+        return $result;
+
+    }
+
+    public function getOldTours($perPage)
+    {
+        $columns = [
+            'id',
+            'title',
+            'description',
+            'topic',
+            'start_date',
+            'end_date',
+            'cost',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('end_date' ,'<', Carbon::now()->format('Y-m-d'))
+            ->orderBy('id','DESC')
+            ->paginate($perPage);
+
+
+
+        return $result;
+    }
+
+
+
+    public function getCurrentTours($perPage)
+    {
+        $columns = [
+            'id',
+            'title',
+            'description',
+            'topic',
+            'start_date',
+            'end_date',
+            'cost',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('end_date' ,'>', Carbon::now()->format('Y-m-d'))
+            ->where('start_date' ,'<', Carbon::now()->format('Y-m-d'))
+            ->orderBy('id','DESC')
+            ->paginate($perPage);
+
+        return $result;
+    }
+
+
+    public function getFutureTours($perPage)
+    {
+        $columns = [
+            'id',
+            'title',
+            'description',
+            'topic',
+            'start_date',
+            'end_date',
+            'cost',
+        ];
+
+        $result = $this->startConditions()
+            ->select($columns)
+            ->where('start_date' ,'>', Carbon::now()->format('Y-m-d'))
+            ->orderBy('id','DESC')
+            ->paginate($perPage);
+
+        return $result;
+    }
 
 
 }

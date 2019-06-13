@@ -28,6 +28,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
 </head>
 <body>
 
@@ -87,7 +89,6 @@
             </li>
 
 
-
         </ul>
     </div>
     <div id="stickyContent"></div>
@@ -112,6 +113,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -127,10 +129,13 @@
                                 </li>
                             @endif
                         @else
+
+
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <i class="fas fa-user"></i> {{ Auth::user()->name }}  <span class="caret"></span>
-                                </a>
+
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <i class="fas fa-user"></i> {{ Auth::user()->name }}  <span class="caret"></span>
+                                    </a>
 
 
                                 @if(Auth::check())
@@ -160,6 +165,22 @@
                                     </div>
                                 @endif
                             </li>
+                            <li>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        <i class="fas fa-calendar-alt"></i> Мероприятия  <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="">
+                                            <i class="fas fa-bullhorn"></i> {{ __('События') }}
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{route('museum.tours')}}">
+                                            <i class="fas fa-atlas"></i> {{ __('Экскурсии') }}
+                                        </a>
+                                    </div>
+                            </li>
+
                         @endguest
                     </ul>
                 </div>

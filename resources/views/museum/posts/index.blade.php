@@ -56,11 +56,7 @@
 
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
                 <div class="list-group">
-
-                        <a href="{{route('museum.show.sort')}}" class="list-group-item bg-dark text-white">Отсортировать по категориям</a>
-
-
-
+                    <a href="{{route('museum.show.sort')}}" class="list-group-item bg-dark text-white">Отсортировать по категориям</a>
                 </div>
                 <form method="GET" action="{{route('museum.show.count')}}">
                     @csrf
@@ -72,14 +68,6 @@
                     <input style="margin-top: 10px; margin-bottom: 10px" name="search" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
                     <button class="btn btn-dark btn-lg" type="submit">Вывести</button>
                 </form>
-
-
-
-
-
-
-
-
             </div>
 
             @if($paginator->total() > $paginator->count())
